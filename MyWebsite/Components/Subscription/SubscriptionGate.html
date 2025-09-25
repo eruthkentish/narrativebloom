@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    span.s1 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s2 {font-kerning: none; background-color: #fffffe}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2">, { useState, useEffect } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { motion } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"framer-motion"</span><span class="s5">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s5"> { </span><span class="s2">Card</span><span class="s5">, </span><span class="s2">CardContent</span><span class="s5">, </span><span class="s2">CardHeader</span><span class="s5">, </span><span class="s2">CardTitle</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s4">"@/components/ui/card"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Button</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/components/ui/button"</span><span class="s5">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s5"> { </span><span class="s2">Crown</span><span class="s5">, </span><span class="s2">Sparkles</span><span class="s5">, </span><span class="s2">Heart</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s4">"lucide-react"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Link</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"react-router-dom"</span><span class="s5">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { createPageUrl } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"@/utils"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">User</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/entities/User"</span><span class="s5">;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">const</span><span class="s2"> tierConfigs = {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>seedling: {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">'Seedling Access'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>icon: </span><span class="s3">Sparkles</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">'from-green-400 to-emerald-500'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>entryLimit: </span><span class="s7">3</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>bloom: {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">'Bloom Membership'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>icon: </span><span class="s3">Heart</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">'from-blue-500 to-indigo-600'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>entryLimit: </span><span class="s1">null</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>publishing: {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">'Publishing Pathway'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>icon: </span><span class="s3">Crown</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">'from-purple-500 to-violet-600'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>entryLimit: </span><span class="s1">null</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s2">};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s2">export</span><span class="s5"> </span><span class="s2">default</span><span class="s5"> </span><span class="s2">function</span><span class="s5"> </span><span class="s3">SubscriptionGate</span><span class="s5">({<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>requiredTier,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>feature,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>children,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>customMessage,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>checkEntryLimit = </span><span class="s1">false</span><span class="s2"><span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2">}) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [user, setUser] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [hasAccess, setHasAccess] = useState(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [isLoading, setIsLoading] = useState(</span><span class="s1">true</span><span class="s2">);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> checkAccess = </span><span class="s1">async</span><span class="s2"> () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">try</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">const</span><span class="s2"> currentUser = </span><span class="s1">await</span><span class="s2"> </span><span class="s3">User</span><span class="s2">.me();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setUser(currentUser);</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">const</span><span class="s2"> userTier = currentUser.subscription_tier || </span><span class="s4">'seedling'</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">const</span><span class="s2"> tierLevels = { seedling: </span><span class="s7">1</span><span class="s2">, bloom: </span><span class="s7">2</span><span class="s2">, publishing: </span><span class="s7">3</span><span class="s2"> };</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">const</span><span class="s2"> requiredLevels = { seedling: </span><span class="s7">1</span><span class="s2">, bloom: </span><span class="s7">2</span><span class="s2">, publishing: </span><span class="s7">3</span><span class="s2"> };</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">let</span><span class="s2"> access = tierLevels[userTier] &gt;= requiredLevels[requiredTier];</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span></span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">// Check entry limit for seedling users</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">if</span><span class="s2"> (checkEntryLimit &amp;&amp; userTier === </span><span class="s4">'seedling'</span><span class="s2">) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s1">const</span><span class="s2"> entryCount = currentUser.entries_count || </span><span class="s7">0</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s1">const</span><span class="s2"> limit = tierConfigs.seedling.entryLimit;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>access = access &amp;&amp; entryCount &lt; limit;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setHasAccess(access);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>} </span><span class="s1">catch</span><span class="s2"> (error) {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>console.error(</span><span class="s2">'Error checking subscription access:'</span><span class="s5">, error);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setHasAccess(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>} </span><span class="s1">finally</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setIsLoading(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>checkAccess();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, [requiredTier, checkEntryLimit]);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">if</span><span class="s2"> (isLoading) {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s5"> &lt;div className=</span><span class="s2">"animate-pulse bg-gray-200 h-32 rounded-lg"</span><span class="s5">&gt;&lt;/div&gt;;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">if</span><span class="s2"> (hasAccess) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> children;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> requiredConfig = tierConfigs[requiredTier];</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> currentConfig = tierConfigs[user?.subscription_tier || </span><span class="s4">'seedling'</span><span class="s2">];</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">return</span><span class="s5"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>initial={{ opacity: </span><span class="s7">0</span><span class="s2">, y: </span><span class="s7">20</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>animate={{ opacity: </span><span class="s7">1</span><span class="s2">, y: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>className=</span><span class="s2">"flex items-center justify-center p-6"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;</span><span class="s3">Card</span><span class="s5"> className=</span><span class="s2">"max-w-md text-center"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;</span><span class="s3">CardHeader</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className={</span><span class="s2">`w-16 h-16 bg-gradient-to-br </span><span class="s5">${requiredConfig.color}</span><span class="s2"> rounded-2xl flex items-center justify-center mx-auto mb-4`</span><span class="s5">}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;requiredConfig.icon className=</span><span class="s4">"w-8 h-8 text-white"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">CardTitle</span><span class="s2"> className=</span><span class="s4">"text-xl text-gray-800"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>{customMessage || </span><span class="s4">`</span><span class="s2">${feature}</span><span class="s4"> requires </span><span class="s2">${requiredConfig.name}</span><span class="s4">`</span><span class="s2">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">CardTitle</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/</span><span class="s3">CardHeader</span><span class="s2">&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span>&lt;</span><span class="s2">CardContent</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>{checkEntryLimit &amp;&amp; user?.subscription_tier === </span><span class="s4">'seedling'</span><span class="s2"> ? (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p className=</span><span class="s4">"text-gray-600 mb-6"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span></span><span class="s3">You</span><span class="s2">'ve reached the limit of {tierConfigs.seedling.entryLimit} entries.<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s3">Upgrade</span><span class="s2"> to </span><span class="s1">continue</span><span class="s2"> your healing journey </span><span class="s1">with</span><span class="s2"> unlimited writing.</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>) : (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p className=</span><span class="s4">"text-gray-600 mb-6"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s3">Unlock</span><span class="s2"> </span><span class="s1">this</span><span class="s2"> feature and accelerate your healing journey </span><span class="s1">with</span><span class="s2"> advanced tools and insights.</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>)}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">Link</span><span class="s2"> to={createPageUrl(</span><span class="s4">'Pricing'</span><span class="s2">)}&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Button</span><span class="s5"> className=</span><span class="s2">"w-full bg-blue-600 hover:bg-blue-700"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s3">View</span><span class="s2"> </span><span class="s3">Pricing</span><span class="s2"> &amp; </span><span class="s3">Upgrade</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">Link</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/</span><span class="s3">CardContent</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/</span><span class="s3">Card</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p1"><span class="s2">}</span></p>
+</body>
+</html>

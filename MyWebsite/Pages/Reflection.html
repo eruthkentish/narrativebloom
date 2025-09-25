@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    span.s1 {font-kerning: none}
+    span.s2 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s3 {font-kerning: none; background-color: #fffffe}
+    span.s4 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s5 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s6 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s7 {font-kerning: none; color: #0f7001; background-color: #fffffe; -webkit-text-stroke: 0px #0f7001}
+    span.s8 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p2"><span class="s2">import</span><span class="s3"> </span><span class="s4">React</span><span class="s3">, { useState, useEffect, useCallback } </span><span class="s2">from</span><span class="s3"> </span><span class="s5">"react"</span><span class="s3">;</span></p>
+<p class="p3"><span class="s2">import</span><span class="s6"> { motion } </span><span class="s2">from</span><span class="s6"> </span><span class="s3">"framer-motion"</span><span class="s6">;</span></p>
+<p class="p4"><span class="s2">import</span><span class="s6"> { </span><span class="s3">Card</span><span class="s6">, </span><span class="s3">CardContent</span><span class="s6">, </span><span class="s3">CardHeader</span><span class="s6">, </span><span class="s3">CardTitle</span><span class="s6"> } </span><span class="s2">from</span><span class="s6"> </span><span class="s5">"@/components/ui/card"</span><span class="s6">;</span></p>
+<p class="p3"><span class="s2">import</span><span class="s6"> { </span><span class="s4">Button</span><span class="s6"> } </span><span class="s2">from</span><span class="s6"> </span><span class="s3">"@/components/ui/button"</span><span class="s6">;</span></p>
+<p class="p4"><span class="s2">import</span><span class="s6"> { </span><span class="s3">Tabs</span><span class="s6">, </span><span class="s3">TabsContent</span><span class="s6">, </span><span class="s3">TabsList</span><span class="s6">, </span><span class="s3">TabsTrigger</span><span class="s6"> } </span><span class="s2">from</span><span class="s6"> </span><span class="s5">"@/components/ui/tabs"</span><span class="s6">;</span></p>
+<p class="p3"><span class="s2">import</span><span class="s6"> { </span><span class="s4">WritingEntry</span><span class="s6"> } </span><span class="s2">from</span><span class="s6"> </span><span class="s3">"@/entities/WritingEntry"</span><span class="s6">;</span></p>
+<p class="p3"><span class="s2">import</span><span class="s6"> { </span><span class="s4">User</span><span class="s6"> } </span><span class="s2">from</span><span class="s6"> </span><span class="s3">"@/entities/User"</span><span class="s6">;</span></p>
+<p class="p3"><span class="s2">import</span><span class="s6"> { </span><span class="s4">InvokeLLM</span><span class="s6"> } </span><span class="s2">from</span><span class="s6"> </span><span class="s3">"@/integrations/Core"</span><span class="s6">;</span></p>
+<p class="p5"><span class="s3">import</span><span class="s6"> {<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">LineChart</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span></span><span class="s4">Line</span><span class="s3">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">BarChart</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span></span><span class="s4">Bar</span><span class="s3">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">PieChart</span><span class="s6">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span></span><span class="s4">Pie</span><span class="s3">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Cell</span><span class="s6">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">XAxis</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">YAxis</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">CartesianGrid</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Tooltip</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">ResponsiveContainer</span><span class="s6">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">ScatterChart</span><span class="s6">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Scatter</span></p>
+<p class="p3"><span class="s6">} </span><span class="s2">from</span><span class="s6"> </span><span class="s3">"recharts"</span><span class="s6">;</span></p>
+<p class="p5"><span class="s3">import</span><span class="s6"> {<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">BookOpen</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Brain</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Heart</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Sparkles</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">TrendingUp</span><span class="s6">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">BarChart3</span><span class="s6">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Search</span><span class="s6">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Target</span><span class="s6">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Loader2</span><span class="s6">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span></span><span class="s4">Eye</span><span class="s3">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Lightbulb</span><span class="s6">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Activity</span><span class="s6">,</span></p>
+<p class="p4"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s3">Layers</span></p>
+<p class="p3"><span class="s6">} </span><span class="s2">from</span><span class="s6"> </span><span class="s3">"lucide-react"</span><span class="s6">;</span></p>
+<p class="p2"><span class="s2">import</span><span class="s3"> { format } </span><span class="s2">from</span><span class="s3"> </span><span class="s5">"date-fns"</span><span class="s3">;</span></p>
+<p class="p3"><span class="s2">import</span><span class="s6"> </span><span class="s4">SubscriptionGate</span><span class="s6"> </span><span class="s2">from</span><span class="s6"> </span><span class="s3">"../components/subscription/SubscriptionGate"</span><span class="s6">; </span><span class="s7">// New import</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p5"><span class="s3">export</span><span class="s6"> </span><span class="s3">default</span><span class="s6"> </span><span class="s3">function</span><span class="s6"> </span><span class="s4">Reflection</span><span class="s6">() {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span></span><span class="s2">const</span><span class="s3"> [user, setUser] = useState(</span><span class="s2">null</span><span class="s3">);</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span></span><span class="s2">const</span><span class="s3"> [entries, setEntries] = useState([]);</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span></span><span class="s2">const</span><span class="s3"> [analysisData, setAnalysisData] = useState(</span><span class="s2">null</span><span class="s3">);</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span></span><span class="s2">const</span><span class="s3"> [isLoading, setIsLoading] = useState(</span><span class="s2">true</span><span class="s3">);</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span></span><span class="s2">const</span><span class="s3"> generateComprehensiveAnalysis = useCallback(</span><span class="s2">async</span><span class="s3"> (entries) =&gt; {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s2">if</span><span class="s3"> (entries.length === </span><span class="s8">0</span><span class="s3">) </span><span class="s2">return</span><span class="s3">;</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s2">try</span><span class="s3"> {</span></p>
+<p class="p6"><span class="s6"><span class="Apple-converted-space">      </span></span><span class="s3">// Combine all content for comprehensive analysis</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">      </span></span><span class="s2">const</span><span class="s3"> allContent = entries.map(entry =&gt; entry.content).join(</span><span class="s5">'\n\n'</span><span class="s3">);</span></p>
+<p class="p1"><span class="s3"><span class="Apple-converted-space">      </span></span></p>
+<p class="p6"><span class="s6"><span class="Apple-converted-space">      </span></span><span class="s3">// Use AI to perform the three-process analysis following the framework</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">      </span></span><span class="s2">const</span><span class="s3"> analysis = </span><span class="s2">await</span><span class="s3"> </span><span class="s4">InvokeLLM</span><span class="s3">({</span></p>
+<p class="p3"><span class="s6"><span class="Apple-converted-space">        </span>prompt: </span><span class="s3">`Perform a comprehensive analysis of this personal writing collection using "The Emotional Healing Behind Words" three-process framework. Synthesize findings into clear, logical, and therapeutically sound insights.</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">Writing Collection: "</span><span class="s6">${allContent}</span><span class="s3">"</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">PROCESS 1 - Core Analysis Types:</span></p>
+<p class="p3"><span class="s3">• Spiritual Analysis: Examine themes of transcendence, meaning-making, faith, existential questions.</span></p>
+<p class="p3"><span class="s3">• Psychological Analysis: Focus on cognitive patterns, mental processes, and sentence brevity patterns related to trauma.</span></p>
+<p class="p3"><span class="s3">• Comparative Analysis: Compare patterns across emotional, psychological, and spiritual dimensions to find intersections.</span></p>
+<p class="p3"><span class="s3">• Emotional Analysis: Identify themes of joy, sadness, fear, anger, love and their flow.</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">PROCESS 2 - Technical Analysis Methods:</span></p>
+<p class="p3"><span class="s3">• Trend Analysis: Map shifts in emotion, readability, and themes over time.</span></p>
+<p class="p3"><span class="s3">• Metadata Analysis: Examine contextual factors and themes within the broader writing corpus.</span></p>
+<p class="p3"><span class="s3">• Sentiment Analysis: Quantify emotional tone and analyze the spectrum of positivity and negativity.</span></p>
+<p class="p3"><span class="s3">• Vocabulary Density/Lexical Density: Calculate ratio of content words to total words to assess complexity.</span></p>
+<p class="p3"><span class="s3">• Average Words Per Sentence: Measure sentence length patterns.</span></p>
+<p class="p3"><span class="s3">• Frequent Words in Corpus: Identify top recurring words.</span></p>
+<p class="p3"><span class="s3">• Readability: Evaluate text complexity using Coleman-Liau methodology.</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">PROCESS 3 - Final Integration:</span></p>
+<p class="p3"><span class="s3">• Interpretative Reflection: Synthesize ALL findings from Process 1 and 2 into therapeutic insights that promote self-awareness and emotional growth. Ensure the reflection is coherent and directly references findings from the previous processes.</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">Provide a JSON output with the complete, structured analysis.`</span><span class="s6">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">        </span>response_json_schema: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">          </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">          </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">            </span>process_1_core_analysis: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">              </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">              </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>spiritual_analysis: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>themes: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>transcendence_indicators: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>meaning_making_patterns: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>faith_expressions: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>existential_depth: { type: </span><span class="s5">"string"</span><span class="s3"> }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>psychological_analysis: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>cognitive_themes: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>trauma_processing_indicators: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>sentence_brevity_patterns: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>mental_process_words: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>psychological_growth_stage: { type: </span><span class="s5">"string"</span><span class="s3"> }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>emotional_analysis: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>dominant_emotions: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>emotional_flow_patterns: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>joy_indicators: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>sadness_indicators: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>fear_indicators: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>anger_indicators: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>love_indicators: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>comparative_analysis: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>cross_dimensional_patterns: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>dominant_dimension: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>integration_insights: { type: </span><span class="s5">"string"</span><span class="s3"> }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">              </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">            </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">            </span>process_2_technical_methods: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">              </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">              </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>readability_assessment: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>coleman_liau_score: { type: </span><span class="s5">"number"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>avg_sentence_length: { type: </span><span class="s5">"number"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>avg_word_length: { type: </span><span class="s5">"number"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>complexity_level: { type: </span><span class="s5">"string"</span><span class="s3"> }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>lexical_density: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>content_word_ratio: { type: </span><span class="s5">"number"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>vocabulary_richness: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>density_interpretation: { type: </span><span class="s5">"string"</span><span class="s3"> }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>frequent_words_analysis: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>top_words: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                      </span>type: </span><span class="s5">"array"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                      </span>items: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                        </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                        </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                          </span>word: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                          </span>frequency: { type: </span><span class="s5">"number"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                          </span>emotional_category: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                          </span>dimension: { type: </span><span class="s5">"string"</span><span class="s3"> }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                        </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                      </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>word_trends: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>motifs_identified: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>sentiment_analysis: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>overall_sentiment: { type: </span><span class="s5">"number"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>positivity_spectrum: { type: </span><span class="s5">"number"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>negativity_spectrum: { type: </span><span class="s5">"number"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>emotional_balance: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>sentiment_patterns: { type: </span><span class="s5">"string"</span><span class="s3"> }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>trend_analysis: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>emotional_evolution: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>readability_trends: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>thematic_shifts: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>growth_trajectory: { type: </span><span class="s5">"string"</span><span class="s3"> }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>metadata_analysis: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>contextual_themes: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>corpus_positioning: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                    </span>broader_patterns: { type: </span><span class="s5">"string"</span><span class="s3"> }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                  </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">              </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">            </span>},</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">            </span>process_3_interpretative_reflection: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">              </span>type: </span><span class="s5">"object"</span><span class="s3">,</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">              </span>properties: {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>synthesis_insights: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>therapeutic_observations: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>healing_indicators: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>growth_opportunities: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>self_awareness_revelations: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>emotional_healing_assessment: { type: </span><span class="s5">"string"</span><span class="s3"> },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>recommended_focus_areas: { type: </span><span class="s5">"array"</span><span class="s3">, items: { type: </span><span class="s5">"string"</span><span class="s3"> } },</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">                </span>words_of_encouragement: { type: </span><span class="s5">"string"</span><span class="s3"> }</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">              </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">      </span>});</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">      </span>setAnalysisData(analysis);</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">    </span>} </span><span class="s2">catch</span><span class="s3"> (error) {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">      </span>console.error(</span><span class="s5">'Analysis failed:'</span><span class="s3">, error);</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span>}, []);</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">  </span></span><span class="s2">const</span><span class="s3"> loadReflectionData = useCallback(</span><span class="s2">async</span><span class="s3"> () =&gt; {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">    </span>setIsLoading(</span><span class="s2">true</span><span class="s3">);</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s2">try</span><span class="s3"> {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">      </span></span><span class="s2">const</span><span class="s3"> currentUser = </span><span class="s2">await</span><span class="s3"> </span><span class="s4">User</span><span class="s3">.me();</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">      </span>setUser(currentUser);</span></p>
+<p class="p1"><span class="s1"></span><br></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">      </span></span><span class="s2">if</span><span class="s3"> (currentUser) {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s2">const</span><span class="s3"> writingEntries = </span><span class="s2">await</span><span class="s3"> </span><span class="s4">WritingEntry</span><span class="s3">.filter({ created_by: currentUser.email }, </span><span class="s5">'-created_date'</span><span class="s3">);</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">        </span>setEntries(writingEntries);</span></p>
+<p class="p1"><span class="s3"><span class="Apple-converted-space">        </span></span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s2">if</span><span class="s3"> (writingEntries.length &gt; </span><span class="s8">0</span><span class="s3">) {</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">          </span></span><span class="s2">await</span><span class="s3"> generateComprehensiveAnalysis(writingEntries);</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s3"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s3"><span class="Apple-converted-space"> </span></span></p>
+</body>
+</html>

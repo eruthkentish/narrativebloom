@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    span.s1 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s2 {font-kerning: none; background-color: #fffffe}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #0f7001; background-color: #fffffe; -webkit-text-stroke: 0px #0f7001}
+    span.s8 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2">, { useState, useEffect } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { motion } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"framer-motion"</span><span class="s5">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s5"> { </span><span class="s2">Card</span><span class="s5">, </span><span class="s2">CardContent</span><span class="s5">, </span><span class="s2">CardHeader</span><span class="s5">, </span><span class="s2">CardTitle</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s4">"@/components/ui/card"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Button</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/components/ui/button"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Badge</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/components/ui/badge"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">User</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/entities/User"</span><span class="s5">;</span></p>
+<p class="p4"><span class="s2">import</span><span class="s5"> {<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Check</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Sparkles</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">BookOpen</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Crown</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Flower2</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">BarChart3</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Users</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Heart</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">PenTool</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">TrendingUp</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Award</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Zap</span></p>
+<p class="p2"><span class="s5">} </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"lucide-react"</span><span class="s5">;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s2">export</span><span class="s5"> </span><span class="s2">default</span><span class="s5"> </span><span class="s2">function</span><span class="s5"> </span><span class="s3">Pricing</span><span class="s5">() {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [user, setUser] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [currentTier, setCurrentTier] = useState(</span><span class="s4">'seedling'</span><span class="s2">);</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> loadUser = </span><span class="s1">async</span><span class="s2"> () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">try</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">const</span><span class="s2"> currentUser = </span><span class="s1">await</span><span class="s2"> </span><span class="s3">User</span><span class="s2">.me();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setUser(currentUser);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setCurrentTier(currentUser.subscription_tier || </span><span class="s4">'seedling'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>} </span><span class="s1">catch</span><span class="s2"> (error) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>console.error(</span><span class="s4">'Error loading user:'</span><span class="s2">, error);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>loadUser();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, []);</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> subscriptionTiers = [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>id: </span><span class="s4">'seedling'</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>name: </span><span class="s2">'Seedling Access'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>price: </span><span class="s4">'Free'</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>priceDetails: </span><span class="s4">'Forever'</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Sparkles</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>color: </span><span class="s2">'from-green-400 to-emerald-500'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>features: [</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Basic Writing Studio access'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Limited Poetry Garden prompts'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Track up to 3 entries'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Community forum access'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Weekly newsletter'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>],</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>limitations: [</span><span class="s2">'Limited to 3 entries'</span><span class="s5">, </span><span class="s2">'Basic prompts only'</span><span class="s5">, </span><span class="s2">'No advanced analysis'</span><span class="s5">],</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>cta: </span><span class="s2">'Get Started Free'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>id: </span><span class="s4">'bloom'</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>name: </span><span class="s2">'Bloom Membership'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>price: </span><span class="s4">'$4.50'</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>priceDetails: </span><span class="s4">'per month'</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Heart</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>color: </span><span class="s2">'from-blue-500 to-indigo-600'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>popular: </span><span class="s1">true</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>features: [</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Full Writing Studio &amp; Poetry Garden access'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Weekly 7-Minute Challenges'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Advanced guided prompts'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Reflection &amp; Analysis Dashboard'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Computational emotional analysis'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Community workshops'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Progress tracking charts &amp; insights'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Unlimited entries'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>limitations: [],</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>cta: </span><span class="s2">'Start Bloom Journey'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>benefits: </span><span class="s2">'Transform private reflection into structured personal growth and visualize emotional development.'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>paymentLink: </span><span class="s2">'https://buy.stripe.com/placeholder_bloom'</span><span class="s5"> </span><span class="s7">// Placeholder</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>id: </span><span class="s2">'publishing'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>name: </span><span class="s2">'Publishing Pathway'</span><span class="s5">,</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">      </span>price: </span><span class="s4">'$25'</span><span class="s5">, </span><span class="s2">// Simplified price</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>priceDetails: </span><span class="s4">'per month'</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Crown</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>color: </span><span class="s2">'from-purple-500 to-violet-600'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>premium: </span><span class="s1">true</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>features: [</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Everything in Bloom Membership'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Guided Manuscript Development'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Professional editorial guidance'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Personalized mentorship'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Publication-focused workshops'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Free Digital Self-Publishing'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Physical copies with Healing Flowers'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Pay printing costs only'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Featured publication opportunities'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">'Kentish Publishing Company partnership'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>limitations: [],</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>cta: </span><span class="s2">'Begin Publishing Path'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>benefits: </span><span class="s2">'Heal, create, and share your work professionally without financial barriers. Each book becomes a tangible celebration of your growth.'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>paymentLink: </span><span class="s2">'https://buy.stripe.com/placeholder_publishing'</span><span class="s5"> </span><span class="s7">// Placeholder</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>];</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> uniqueValues = [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Heart</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>title: </span><span class="s2">'Healing Meets Publishing'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>description: </span><span class="s2">'Narrative therapy combined with professional publishing guidance'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">BarChart3</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>title: </span><span class="s2">'Data-Driven Emotional Insights'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>description: </span><span class="s2">'Computational analysis ranks and organizes emotions, providing evidence-based reflection'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">TrendingUp</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>title: </span><span class="s2">'Interactive Visualization'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>description: </span><span class="s2">'Poetry Garden shows emotional, psychological, and spiritual growth in real time'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Zap</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>title: </span><span class="s2">'Three-Dimensional Healing'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>description: </span><span class="s2">'Emotional, psychological, and spiritual growth for holistic development'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Award</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>title: </span><span class="s2">'Academic &amp; Professional Credibility'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>description: </span><span class="s2">'Partnerships with NHS, Oxford, King\'s College London, and Columbia University'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Flower2</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>title: </span><span class="s2">'Personalized Touch'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>description: </span><span class="s2">'Every physical book comes with a Healing Flower, symbolizing resilience and growth'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>];</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> handleSubscribe = </span><span class="s1">async</span><span class="s2"> (tier) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (tier.paymentLink) {</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">// Redirect to payment provider</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>window.location.href = tier.paymentLink;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>} </span><span class="s1">else</span><span class="s2"> {</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">// Handle free subscription</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">try</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">await</span><span class="s2"> </span><span class="s3">User</span><span class="s2">.updateMyUserData({</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>subscription_tier: tier.id,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>subscription_status: </span><span class="s4">'active'</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>subscription_started: </span><span class="s1">new</span><span class="s2"> </span><span class="s3">Date</span><span class="s2">().toISOString()</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>});</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setCurrentTier(tier.id);</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>alert(</span><span class="s2">'Your free Seedling Access is now active!'</span><span class="s5">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>} </span><span class="s1">catch</span><span class="s2"> (error) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>console.error(</span><span class="s4">'Error updating subscription:'</span><span class="s2">, error);</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>alert(</span><span class="s2">'There was an error setting up your free plan. Please try again.'</span><span class="s5">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">return</span><span class="s5"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s4">"min-h-screen py-12"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"max-w-7xl mx-auto px-6"</span><span class="s5">&gt;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* Header */</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2">, y: </span><span class="s8">30</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2">, y: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>className=</span><span class="s4">"text-center mb-16"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Sparkles</span><span class="s2"> className=</span><span class="s4">"w-10 h-10 text-white"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;h1 className=</span><span class="s2">"text-5xl font-serif font-bold gradient-text mb-6"</span><span class="s5">&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s2">Choose</span><span class="s5"> </span><span class="s2">Your</span><span class="s5"> </span><span class="s2">Healing</span><span class="s5"> </span><span class="s2">Journey</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space"> </span></span></p>
+</body>
+</html>

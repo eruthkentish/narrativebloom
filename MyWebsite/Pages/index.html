@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    span.s1 {font-kerning: none; background-color: #fffffe}
+    span.s2 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+    span.s8 {font-kerning: none; color: #bf1c25; background-color: #fffffe; -webkit-text-stroke: 0px #bf1c25}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2"> </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { motion } </span><span class="s5">from</span><span class="s2"> </span><span class="s1">"framer-motion"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { </span><span class="s3">Button</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s1">"@/components/ui/button"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { </span><span class="s3">Card</span><span class="s2">, </span><span class="s3">CardContent</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s1">"@/components/ui/card"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { </span><span class="s3">User</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s1">"@/entities/User"</span><span class="s2">;</span></p>
+<p class="p3"><span class="s5">import</span><span class="s2"> { </span><span class="s1">ArrowRight</span><span class="s2">, </span><span class="s1">BookHeart</span><span class="s2">, </span><span class="s1">Edit</span><span class="s2">, </span><span class="s1">Heart</span><span class="s2">, </span><span class="s1">TrendingUp</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s4">"lucide-react"</span><span class="s2">;</span></p>
+<p class="p4"><span class="s5">import</span><span class="s1"> { createPageUrl } </span><span class="s5">from</span><span class="s1"> </span><span class="s4">"@/utils"</span><span class="s1">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { </span><span class="s3">Link</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s1">"react-router-dom"</span><span class="s2">;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">export</span><span class="s2"> </span><span class="s1">default</span><span class="s2"> </span><span class="s1">function</span><span class="s2"> </span><span class="s3">HomePage</span><span class="s2">() {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s5">const</span><span class="s1"> handleLogin = </span><span class="s5">async</span><span class="s1"> () =&gt; {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s5">try</span><span class="s1"> {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s5">await</span><span class="s1"> </span><span class="s3">User</span><span class="s1">.loginWithRedirect(createPageUrl(</span><span class="s4">'Dashboard'</span><span class="s1">));</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>} </span><span class="s5">catch</span><span class="s1"> (error) {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>console.error(</span><span class="s4">"Login failed:"</span><span class="s1">, error);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s5">const</span><span class="s1"> features = [</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Edit</span><span class="s1">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>title: </span><span class="s1">"Therapeutic Writing"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>description: </span><span class="s1">"Use guided prompts and free writing to explore your thoughts and emotions in a safe space."</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Heart</span><span class="s1">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>title: </span><span class="s1">"Poetry Garden"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>description: </span><span class="s1">"Watch your inner world blossom into a beautiful, living garden based on your unique writing."</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">TrendingUp</span><span class="s1">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>title: </span><span class="s1">"Track Your Growth"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>description: </span><span class="s1">"Visualize your emotional journey and progress over time with insightful, personalized charts."</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>];</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s1">"min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-emerald-50 text-gray-800"</span><span class="s2">&gt;</span></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">      </span>{</span><span class="s1">/* Header */</span><span class="s2">}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>&lt;header className=</span><span class="s4">"py-6 px-6"</span><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s1">"max-w-7xl mx-auto flex justify-between items-center"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">Link</span><span class="s1"> to={createPageUrl(</span><span class="s4">"Home"</span><span class="s1">)} className=</span><span class="s4">"flex items-center space-x-3"</span><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s1">"w-12 h-12 bg-gradient-to-br from-rose-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">BookHeart</span><span class="s1"> className=</span><span class="s4">"w-6 h-6 text-white"</span><span class="s1"> /&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">              </span>&lt;h1 className=</span><span class="s1">"text-2xl font-bold font-serif"</span><span class="s2"> style={{ background: </span><span class="s1">'linear-gradient(135deg, #f43f5e, #f59e0b)'</span><span class="s2">, </span><span class="s3">WebkitBackgroundClip</span><span class="s2">: </span><span class="s1">'text'</span><span class="s2">, </span><span class="s3">WebkitTextFillColor</span><span class="s2">: </span><span class="s1">'transparent'</span><span class="s2"> }}&gt;</span><span class="s3">Narrative</span><span class="s2"> </span><span class="s3">Bloom</span><span class="s2">&lt;/h1&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">              </span>&lt;p className=</span><span class="s1">"text-xs text-gray-500 font-medium"</span><span class="s2">&gt;</span><span class="s3">Healing</span><span class="s2"> </span><span class="s3">Through</span><span class="s2"> </span><span class="s3">Words</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">Link</span><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">Button</span><span class="s2"> onClick={handleLogin} variant=</span><span class="s1">"outline"</span><span class="s2"> className=</span><span class="s1">"border-rose-300 text-rose-700 hover:bg-rose-50"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">Login</span><span class="s1"> / </span><span class="s3">Sign</span><span class="s1"> </span><span class="s3">Up</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">Button</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/header&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>&lt;main&gt;</span></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">        </span>{</span><span class="s1">/* Hero Section */</span><span class="s2">}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;section className=</span><span class="s4">"text-center py-20 px-6"</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;motion.div</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>initial={{ opacity: </span><span class="s7">0</span><span class="s1">, y: </span><span class="s7">20</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>animate={{ opacity: </span><span class="s7">1</span><span class="s1">, y: </span><span class="s7">0</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>transition={{ duration: </span><span class="s7">0.8</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>&lt;h1 className=</span><span class="s1">"text-5xl md:text-7xl font-serif font-bold mb-6"</span><span class="s2"> style={{ background: </span><span class="s1">'linear-gradient(135deg, #f43f5e, #f59e0b)'</span><span class="s2">, </span><span class="s3">WebkitBackgroundClip</span><span class="s2">: </span><span class="s1">'text'</span><span class="s2">, </span><span class="s3">WebkitTextFillColor</span><span class="s2">: </span><span class="s1">'transparent'</span><span class="s2"> }}&gt;</span></p>
+<p class="p3"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s1">Where</span><span class="s2"> </span><span class="s1">Writing</span><span class="s2"> </span><span class="s1">Becomes</span><span class="s2"> </span><span class="s1">Wellness</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/h1&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p className=</span><span class="s1">"text-xl max-w-3xl mx-auto text-gray-600 mb-10 leading-relaxed"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span></span><span class="s3">Narrative</span><span class="s1"> </span><span class="s3">Bloom</span><span class="s1"> merges publishing </span><span class="s5">with</span><span class="s1"> wellness through gamified narrative therapy. </span><span class="s3">Discover</span><span class="s1"> the power </span><span class="s5">of</span><span class="s1"> your own words to heal, grow, and create.</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Button</span><span class="s1"> onClick={handleLogin} className=</span><span class="s4">"btn-therapy text-lg px-8 py-6 rounded-2xl"</span><span class="s1">&gt;</span></p>
+<p class="p3"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s1">Begin</span><span class="s2"> </span><span class="s1">Your</span><span class="s2"> </span><span class="s1">Healing</span><span class="s2"> </span><span class="s1">Journey</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">ArrowRight</span><span class="s1"> className=</span><span class="s4">"ml-2 w-5 h-5"</span><span class="s1"> /&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/</span><span class="s3">Button</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/motion.div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">        </span>{</span><span class="s1">/* Features Section */</span><span class="s2">}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;section className=</span><span class="s4">"py-20 px-6 bg-white/40"</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s4">"max-w-7xl mx-auto"</span><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>&lt;h2 className=</span><span class="s1">"text-4xl font-serif font-bold text-center mb-12"</span><span class="s2">&gt;</span><span class="s3">Transform</span><span class="s2"> </span><span class="s3">Your</span><span class="s2"> </span><span class="s3">Story</span><span class="s2">&lt;/h2&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s4">"grid md:grid-cols-3 gap-8"</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>{features.map((feature, index) =&gt; (</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;motion.div</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span>key={index}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span>initial={{ opacity: </span><span class="s7">0</span><span class="s1">, y: </span><span class="s7">30</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span>animate={{ opacity: </span><span class="s7">1</span><span class="s1">, y: </span><span class="s7">0</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span>transition={{ delay: </span><span class="s7">0.2</span><span class="s1"> + index * </span><span class="s7">0.15</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;</span><span class="s3">Card</span><span class="s2"> className=</span><span class="s1">"card-therapy text-center h-full"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;</span><span class="s3">CardContent</span><span class="s1"> className=</span><span class="s4">"p-8"</span><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;div className=</span><span class="s1">"w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-6"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;feature.icon className=</span><span class="s4">"w-8 h-8 text-white"</span><span class="s1"> /&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                      </span>&lt;h3 className=</span><span class="s4">"text-xl font-semibold mb-3"</span><span class="s1">&gt;{feature.title}&lt;/h3&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                      </span>&lt;p className=</span><span class="s4">"text-gray-600 leading-relaxed"</span><span class="s1">&gt;{feature.description}&lt;/p&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/</span><span class="s3">CardContent</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span>&lt;/</span><span class="s3">Card</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/motion.div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>))}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">        </span>{</span><span class="s1">/* Testimonial */</span><span class="s2">}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;section className=</span><span class="s4">"py-20 px-6"</span><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s1">"max-w-3xl mx-auto text-center"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p className=</span><span class="s1">"text-2xl font-serif italic text-gray-700 mb-6"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s1">"Narrative Bloom helped me find my voice during a time I felt lost. Seeing my words create a garden was a beautiful and transformative experience."</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p className=</span><span class="s4">"font-semibold text-gray-800"</span><span class="s1">&gt;- </span><span class="s3">Alex</span><span class="s1"> </span><span class="s3">R</span><span class="s1">.&lt;/p&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/main&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">       </span>{</span><span class="s1">/* Footer */</span><span class="s2">}</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>&lt;footer className=</span><span class="s1">"py-8 px-6 border-t border-rose-100"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s1">"max-w-7xl mx-auto text-center text-gray-500"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s8">©</span><span class="s1"> {</span><span class="s5">new</span><span class="s1"> </span><span class="s3">Date</span><span class="s1">().getFullYear()} </span><span class="s3">Narrative</span><span class="s1"> </span><span class="s3">Bloom</span><span class="s1">. </span><span class="s3">All</span><span class="s1"> </span><span class="s3">Rights</span><span class="s1"> </span><span class="s3">Reserved</span><span class="s1">.</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/footer&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+</body>
+</html>

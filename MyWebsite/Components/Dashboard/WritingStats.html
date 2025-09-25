@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    span.s1 {font-kerning: none; background-color: #fffffe}
+    span.s2 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2"> </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { </span><span class="s1">Card</span><span class="s2">, </span><span class="s1">CardContent</span><span class="s2">, </span><span class="s1">CardHeader</span><span class="s2">, </span><span class="s1">CardTitle</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s4">"@/components/ui/card"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { </span><span class="s1">TrendingUp</span><span class="s2">, </span><span class="s1">PenTool</span><span class="s2">, </span><span class="s1">Calendar</span><span class="s2">, </span><span class="s1">Heart</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s4">"lucide-react"</span><span class="s2">;</span></p>
+<p class="p3"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">export</span><span class="s2"> </span><span class="s1">default</span><span class="s2"> </span><span class="s1">function</span><span class="s2"> </span><span class="s3">WritingStats</span><span class="s2">({ stats }) {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s5">const</span><span class="s1"> statItems = [</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">PenTool</span><span class="s1">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>label: </span><span class="s4">"Entries"</span><span class="s1">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>value: stats.totalEntries,</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">      </span>color: </span><span class="s1">"text-blue-600"</span><span class="s2">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>bgColor: </span><span class="s4">"bg-blue-100"</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Calendar</span><span class="s1">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>label: </span><span class="s4">"Day Streak"</span><span class="s1">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>value: stats.streakDays,</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">      </span>color: </span><span class="s1">"text-emerald-600"</span><span class="s2">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">      </span>bgColor: </span><span class="s1">"bg-emerald-100"</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">TrendingUp</span><span class="s1">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>label: </span><span class="s4">"Words"</span><span class="s1">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>value: stats.wordsWritten?.toLocaleString() || </span><span class="s7">0</span><span class="s1">,</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">      </span>color: </span><span class="s1">"text-purple-600"</span><span class="s2">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>bgColor: </span><span class="s4">"bg-purple-100"</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Heart</span><span class="s1">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>label: </span><span class="s4">"Mood Lift"</span><span class="s1">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>value: stats.moodImprovement &gt; </span><span class="s7">0</span><span class="s1"> ? </span><span class="s4">`+</span><span class="s1">${stats.moodImprovement}</span><span class="s4">`</span><span class="s1"> : stats.moodImprovement,</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">      </span>color: </span><span class="s1">"text-rose-600"</span><span class="s2">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>bgColor: </span><span class="s4">"bg-rose-100"</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>];</span></p>
+<p class="p3"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">    </span>&lt;</span><span class="s3">Card</span><span class="s2"> className=</span><span class="s1">"bg-white/70 backdrop-blur border-gray-200"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>&lt;</span><span class="s1">CardHeader</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">        </span>&lt;</span><span class="s1">CardTitle</span><span class="s2"> className=</span><span class="s4">"text-lg text-gray-800"</span><span class="s2">&gt;</span><span class="s1">Your</span><span class="s2"> </span><span class="s1">Journey</span><span class="s2">&lt;/</span><span class="s1">CardTitle</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/</span><span class="s1">CardHeader</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>&lt;</span><span class="s3">CardContent</span><span class="s1"> className=</span><span class="s4">"space-y-4"</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>{statItems.map((stat, index) =&gt; (</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div key={index} className=</span><span class="s4">"flex items-center justify-between"</span><span class="s1">&gt;</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s1">"flex items-center space-x-3"</span><span class="s2">&gt;</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">              </span>&lt;div className={</span><span class="s1">`w-8 h-8 rounded-lg </span><span class="s2">${stat.bgColor}</span><span class="s1"> flex items-center justify-center`</span><span class="s2">}&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;stat.icon className={</span><span class="s4">`w-4 h-4 </span><span class="s1">${stat.color}</span><span class="s4">`</span><span class="s1">} /&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>&lt;span className=</span><span class="s4">"text-gray-600 text-sm"</span><span class="s1">&gt;{stat.label}&lt;/span&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span className=</span><span class="s4">"font-semibold text-gray-800"</span><span class="s1">&gt;{stat.value}&lt;/span&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>))}</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/</span><span class="s1">CardContent</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/</span><span class="s3">Card</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+</body>
+</html>

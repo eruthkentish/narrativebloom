@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    span.s1 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s2 {font-kerning: none; background-color: #fffffe}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #0f7001; background-color: #fffffe; -webkit-text-stroke: 0px #0f7001}
+    span.s6 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s7 {font-kerning: none}
+    span.s8 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2">, { useState, useEffect, useCallback } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react"</span><span class="s2">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { motion, </span><span class="s3">AnimatePresence</span><span class="s2"> } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"framer-motion"</span><span class="s2">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { </span><span class="s3">Link</span><span class="s2">, useLocation } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react-router-dom"</span><span class="s2">; </span><span class="s5">// Added useLocation</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { createPageUrl } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"@/utils"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s6"> { </span><span class="s3">User</span><span class="s6"> } </span><span class="s1">from</span><span class="s6"> </span><span class="s2">"@/entities/User"</span><span class="s6">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s6"> { </span><span class="s3">WritingEntry</span><span class="s6"> } </span><span class="s1">from</span><span class="s6"> </span><span class="s2">"@/entities/WritingEntry"</span><span class="s6">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s6"> { </span><span class="s3">Button</span><span class="s6"> } </span><span class="s1">from</span><span class="s6"> </span><span class="s2">"@/components/ui/button"</span><span class="s6">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s6"> { </span><span class="s2">Card</span><span class="s6">, </span><span class="s2">CardContent</span><span class="s6">, </span><span class="s2">CardHeader</span><span class="s6">, </span><span class="s2">CardTitle</span><span class="s6">, </span><span class="s2">CardDescription</span><span class="s6"> } </span><span class="s1">from</span><span class="s6"> </span><span class="s4">"@/components/ui/card"</span><span class="s6">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s6"> { </span><span class="s2">PenSquare</span><span class="s6">, </span><span class="s2">ArrowRight</span><span class="s6">, </span><span class="s2">BookOpen</span><span class="s6">, </span><span class="s2">BrainCircuit</span><span class="s6">, </span><span class="s2">HeartPulse</span><span class="s6">, </span><span class="s2">Sparkles</span><span class="s6">, </span><span class="s2">Loader2</span><span class="s6">, </span><span class="s2">Book</span><span class="s6"> } </span><span class="s1">from</span><span class="s6"> </span><span class="s4">"lucide-react"</span><span class="s6">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s6"> { </span><span class="s2">Tabs</span><span class="s6">, </span><span class="s2">TabsContent</span><span class="s6">, </span><span class="s2">TabsList</span><span class="s6">, </span><span class="s2">TabsTrigger</span><span class="s6"> } </span><span class="s1">from</span><span class="s6"> </span><span class="s4">"@/components/ui/tabs"</span><span class="s6">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s6"> </span><span class="s3">Journal</span><span class="s6"> </span><span class="s1">from</span><span class="s6"> </span><span class="s2">"../components/dashboard/Journal"</span><span class="s6">;</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p5"><span class="s2">export</span><span class="s6"> </span><span class="s2">default</span><span class="s6"> </span><span class="s2">function</span><span class="s6"> </span><span class="s3">Dashboard</span><span class="s6">() {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [user, setUser] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [entries, setEntries] = useState([]);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [isLoading, setIsLoading] = useState(</span><span class="s1">true</span><span class="s2">);</span></p>
+<p class="p6"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s6"> location = useLocation(); </span><span class="s2">// Initialize useLocation hook</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [activeTab, setActiveTab] = useState(</span><span class="s4">'overview'</span><span class="s2">); </span><span class="s5">// State to manage active tab</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> loadDashboardData = useCallback(</span><span class="s1">async</span><span class="s2"> () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">try</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">const</span><span class="s2"> currentUser = </span><span class="s1">await</span><span class="s2"> </span><span class="s3">User</span><span class="s2">.me();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setUser(currentUser);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">const</span><span class="s2"> userEntries = </span><span class="s1">await</span><span class="s2"> </span><span class="s3">WritingEntry</span><span class="s2">.filter({ created_by: currentUser.email }, </span><span class="s4">"-created_date"</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setEntries(userEntries);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>} </span><span class="s1">catch</span><span class="s2"> (error) {</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>console.error(</span><span class="s2">"Error loading dashboard data:"</span><span class="s6">, error);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>} </span><span class="s1">finally</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setIsLoading(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, []);</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>loadDashboardData();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, [loadDashboardData]);</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p6"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s2">// Effect to read URL query parameters and set the active tab</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> params = </span><span class="s1">new</span><span class="s2"> </span><span class="s3">URLSearchParams</span><span class="s2">(location.search);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> tab = params.</span><span class="s1">get</span><span class="s2">(</span><span class="s4">'tab'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (tab === </span><span class="s4">'journal'</span><span class="s2">) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setActiveTab(</span><span class="s4">'journal'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>} </span><span class="s1">else</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setActiveTab(</span><span class="s4">'overview'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p6"><span class="s6"><span class="Apple-converted-space">  </span>}, [location.search]); </span><span class="s2">// Re-run when location.search changes</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">if</span><span class="s2"> (isLoading) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"flex justify-center items-center min-h-screen bg-slate-50"</span><span class="s6">&gt;</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">        </span>&lt;</span><span class="s3">Loader2</span><span class="s6"> className=</span><span class="s2">"h-10 w-10 animate-spin text-slate-400"</span><span class="s6"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;p className=</span><span class="s4">"ml-3 text-slate-600"</span><span class="s2">&gt;</span><span class="s3">Loading</span><span class="s2"> your dashboard...&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> featureCards = [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>title: </span><span class="s2">"Writing Studio"</span><span class="s6">,</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>description: </span><span class="s2">"Begin your journey with guided prompts or free writing."</span><span class="s6">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">PenSquare</span><span class="s2">,</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>path: </span><span class="s2">"WritingStudio"</span><span class="s6">,</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>color: </span><span class="s2">"from-blue-500 to-indigo-600"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>title: </span><span class="s2">"Poetry Garden"</span><span class="s6">,</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>description: </span><span class="s2">"Visualize your emotional growth in a living garden."</span><span class="s6">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">HeartPulse</span><span class="s2">,</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>path: </span><span class="s2">"PoetryGarden"</span><span class="s6">,</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>color: </span><span class="s2">"from-emerald-500 to-teal-600"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>title: </span><span class="s4">"Reflection"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>description: </span><span class="s2">"Analyze your writing with our 3-process framework."</span><span class="s6">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">BrainCircuit</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>path: </span><span class="s4">"Reflection"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>color: </span><span class="s2">"from-purple-500 to-violet-600"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>];</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p5"><span class="s6"><span class="Apple-converted-space">  </span></span><span class="s2">return</span><span class="s6"> (</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s2">"min-h-screen bg-slate-50"</span><span class="s6">&gt;</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"max-w-7xl mx-auto p-6"</span><span class="s6">&gt;</span></p>
+<p class="p6"><span class="s6"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* Header */</span><span class="s6">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2">, y: </span><span class="s8">20</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2">, y: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>className=</span><span class="s4">"mb-8"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;h1 className=</span><span class="s4">"text-3xl font-bold text-slate-800 mb-2"</span><span class="s2">&gt;</span><span class="s3">Welcome</span><span class="s2"> back, {user?.full_name || </span><span class="s4">'Writer'</span><span class="s2">}&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s4">"text-slate-600"</span><span class="s2">&gt;</span><span class="s3">Continue</span><span class="s2"> your healing journey through words&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p6"><span class="s6"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* Main Dashboard Tabs */</span><span class="s6">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;</span><span class="s3">Tabs</span><span class="s2"> value={activeTab} onValueChange={setActiveTab} className=</span><span class="s4">"w-full"</span><span class="s2">&gt; {</span><span class="s5">/* Controlled Tabs component */</span><span class="s2">}</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">TabsList</span><span class="s6"> className=</span><span class="s2">"grid w-full grid-cols-2 bg-white/60 p-2 rounded-2xl mb-8"</span><span class="s6">&gt;</span></p>
+<p class="p3"><span class="s6"><span class="Apple-converted-space">            </span>&lt;</span><span class="s2">TabsTrigger</span><span class="s6"> value=</span><span class="s4">"overview"</span><span class="s6"> className=</span><span class="s4">"rounded-xl"</span><span class="s6">&gt;</span><span class="s2">Dashboard</span><span class="s6"> </span><span class="s2">Overview</span><span class="s6">&lt;/</span><span class="s2">TabsTrigger</span><span class="s6">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">TabsTrigger</span><span class="s2"> value=</span><span class="s4">"journal"</span><span class="s2"> className=</span><span class="s4">"rounded-xl"</span><span class="s2">&gt;</span><span class="s3">Journal</span><span class="s2"> &amp; </span><span class="s3">Writings</span><span class="s2">&lt;/</span><span class="s3">TabsTrigger</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">TabsList</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p6"><span class="s6"><span class="Apple-converted-space">          </span>{</span><span class="s2">/* Dashboard Overview */</span><span class="s6">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">TabsContent</span><span class="s2"> value=</span><span class="s4">"overview"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s4">"grid md:grid-cols-3 gap-6"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{featureCards.map((card, index) =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>key={index}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2">, y: </span><span class="s8">20</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2">, y: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>transition={{ delay: </span><span class="s8">0.1</span><span class="s2"> + index * </span><span class="s8">0.1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&gt;</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">                  </span>&lt;</span><span class="s3">Card</span><span class="s6"> className=</span><span class="s2">"card-therapy h-full hover:shadow-lg transition-all duration-300"</span><span class="s6">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;</span><span class="s3">CardHeader</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">                      </span>&lt;div className={</span><span class="s2">`w-12 h-12 bg-gradient-to-br </span><span class="s6">${card.color}</span><span class="s2"> rounded-xl flex items-center justify-center mb-4`</span><span class="s6">}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;card.icon className=</span><span class="s4">"w-6 h-6 text-white"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;</span><span class="s3">CardTitle</span><span class="s2"> className=</span><span class="s4">"text-xl text-slate-800"</span><span class="s2">&gt;{card.title}&lt;/</span><span class="s3">CardTitle</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;</span><span class="s3">CardDescription</span><span class="s2"> className=</span><span class="s4">"text-slate-600"</span><span class="s2">&gt;{card.description}&lt;/</span><span class="s3">CardDescription</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/</span><span class="s3">CardHeader</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;</span><span class="s3">CardContent</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;</span><span class="s3">Link</span><span class="s2"> to={createPageUrl(card.path)}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;</span><span class="s3">Button</span><span class="s2"> className=</span><span class="s4">"w-full btn-therapy"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                          </span></span><span class="s3">Explore</span><span class="s2"> &lt;</span><span class="s3">ArrowRight</span><span class="s2"> className=</span><span class="s4">"ml-2 w-4 h-4"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;/</span><span class="s3">Link</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/</span><span class="s3">CardContent</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/</span><span class="s3">Card</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p6"><span class="s6"><span class="Apple-converted-space">            </span>{</span><span class="s2">/* Quick Stats */</span><span class="s6">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2">, y: </span><span class="s8">20</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2">, y: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>transition={{ delay: </span><span class="s8">0.4</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>className=</span><span class="s4">"mt-8"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">Card</span><span class="s2"> className=</span><span class="s4">"card-therapy"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">CardHeader</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">                  </span>&lt;</span><span class="s3">CardTitle</span><span class="s6"> className=</span><span class="s2">"flex items-center text-xl text-slate-800"</span><span class="s6">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;</span><span class="s3">Book</span><span class="s2"> className=</span><span class="s4">"w-5 h-5 mr-3"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span></span><span class="s3">Writing</span><span class="s2"> </span><span class="s3">Progress</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/</span><span class="s3">CardTitle</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/</span><span class="s3">CardHeader</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">CardContent</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s6"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s2">"grid grid-cols-3 gap-6 text-center"</span><span class="s6">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;div className=</span><span class="s4">"text-2xl font-bold text-blue-600"</span><span class="s2">&gt;{entries.length}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;div className=</span><span class="s4">"text-sm text-slate-600"</span><span class="s2">&gt;</span><span class="s3">Total</span><span class="s2"> </span><span class="s3">Entries</span><span class="s2">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;div className=</span><span class="s4">"text-2xl font-bold text-emerald-600"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>{entries.reduce((sum, entry) =&gt; sum + (entry.word_count || </span><span class="s8">0</span><span class="s2">), </span><span class="s8">0</span><span class="s2">).toLocaleString()}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;div className=</span><span class="s4">"text-sm text-slate-600"</span><span class="s2">&gt;</span><span class="s3">Words</span><span class="s2"> </span><span class="s3">Written</span><span class="s2">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;div className=</span><span class="s4">"text-2xl font-bold text-purple-600"</span><span class="s2">&gt;</span><span class="s8">7</span><span class="s2">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;div className=</span><span class="s4">"text-sm text-slate-600"</span><span class="s2">&gt;</span><span class="s3">Day</span><span class="s2"> </span><span class="s3">Streak</span><span class="s2">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/</span><span class="s3">CardContent</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/</span><span class="s3">Card</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">TabsContent</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s7"></span><br></p>
+<p class="p6"><span class="s6"><span class="Apple-converted-space">          </span>{</span><span class="s2">/* Journal &amp; Writings */</span><span class="s6">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">TabsContent</span><span class="s2"> value=</span><span class="s4">"journal"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Journal</span><span class="s2"> entries={entries} onRefresh={loadDashboardData} /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">TabsContent</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/</span><span class="s3">Tabs</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p1"><span class="s2">}</span></p>
+</body>
+</html>
