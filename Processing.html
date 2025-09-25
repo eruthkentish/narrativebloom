@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    span.s1 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s2 {font-kerning: none; background-color: #fffffe}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+    span.s8 {font-kerning: none; color: #0f7001; background-color: #fffffe; -webkit-text-stroke: 0px #0f7001}
+    span.s9 {font-kerning: none; color: #bf1c25; background-color: #fffffe; -webkit-text-stroke: 0px #bf1c25}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2">, { useState, useEffect } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react"</span><span class="s2">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { motion, </span><span class="s3">AnimatePresence</span><span class="s2"> } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"framer-motion"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Button</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/components/ui/button"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Textarea</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/components/ui/textarea"</span><span class="s5">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s5"> { </span><span class="s2">BookOpen</span><span class="s5">, </span><span class="s2">Heart</span><span class="s5">, </span><span class="s2">Eye</span><span class="s5">, </span><span class="s2">Mountain</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s4">"lucide-react"</span><span class="s5">;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">const</span><span class="s2"> emotionalRealms = [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>id: </span><span class="s4">"grief"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">"Realm of Grief"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">"from-indigo-900 to-purple-900"</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>icon: </span><span class="s3">Heart</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>description: </span><span class="s2">"A space to process loss and mourning"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>id: </span><span class="s4">"shame"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">"Realm of Shame"</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">"from-red-900 to-orange-900"</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>icon: </span><span class="s3">Eye</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>description: </span><span class="s2">"Confronting self-judgment and acceptance"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>id: </span><span class="s4">"hope"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">"Realm of Hope"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">"from-blue-900 to-teal-900"</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>icon: </span><span class="s3">Mountain</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>description: </span><span class="s2">"Finding light in darkness"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s2">];</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">const</span><span class="s2"> prompts = {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>grief: [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>id: </span><span class="s7">1</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>title: </span><span class="s4">"The Memory"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>text: </span><span class="s2">"What moment of loss still echoes in your heart? Write a single line that captures its essence."</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>id: </span><span class="s7">2</span><span class="s2">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>title: </span><span class="s4">"The Bridge"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>text: </span><span class="s2">"Grief builds walls, but also bridges. What word would you use to cross from pain to understanding?"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>shame: [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>id: </span><span class="s7">1</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>title: </span><span class="s4">"The Shadow"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>text: </span><span class="s2">"What story do you tell yourself that isn't true? Write it down to release its power."</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>hope: [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>id: </span><span class="s7">1</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>title: </span><span class="s4">"The Dawn"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>text: </span><span class="s2">"In your darkest moment, what small light did you hold onto? Name it."</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>]</span></p>
+<p class="p1"><span class="s2">};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s2">export</span><span class="s5"> </span><span class="s2">default</span><span class="s5"> </span><span class="s2">function</span><span class="s5"> </span><span class="s3">Processing</span><span class="s5">() {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [gameState, setGameState] = useState(</span><span class="s4">"intro"</span><span class="s2">); </span><span class="s8">// intro, realm_select, playing, prompt</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [currentRealm, setCurrentRealm] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [currentPrompt, setCurrentPrompt] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [userWords, setUserWords] = useState([]);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [promptText, setPromptText] = useState(</span><span class="s4">""</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [realmProgress, setRealmProgress] = useState({});</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> startGame = () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setGameState(</span><span class="s4">"realm_select"</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> enterRealm = (realm) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setCurrentRealm(realm);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setCurrentPrompt(prompts[realm.id][</span><span class="s7">0</span><span class="s2">]);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setGameState(</span><span class="s4">"prompt"</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> submitPrompt = () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (!promptText.trim()) </span><span class="s1">return</span><span class="s2">;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> newWord = {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>realmId: currentRealm.id,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>promptId: currentPrompt.id,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>text: promptText,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>timestamp: </span><span class="s3">Date</span><span class="s2">.now()</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setUserWords([...userWords, newWord]);</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">    </span></span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s2">// Update realm progress</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> realmWords = userWords.filter(w =&gt; w.realmId === currentRealm.id).length + </span><span class="s7">1</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setRealmProgress({</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>...realmProgress,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>[currentRealm.id]: realmWords</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>});</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setPromptText(</span><span class="s4">""</span><span class="s2">);</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">    </span></span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s2">// Check if there are more prompts</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> nextPromptIndex = prompts[currentRealm.id].findIndex(p =&gt; p.id === currentPrompt.id) + </span><span class="s7">1</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (nextPromptIndex &lt; prompts[currentRealm.id].length) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setCurrentPrompt(prompts[currentRealm.id][nextPromptIndex]);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>} </span><span class="s1">else</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setGameState(</span><span class="s4">"realm_complete"</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> returnToRealmSelect = () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setCurrentRealm(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setCurrentPrompt(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setGameState(</span><span class="s4">"realm_select"</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> </span><span class="s3">IntroScreen</span><span class="s2"> = () =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>initial={{ opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>animate={{ opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>className=</span><span class="s2">"min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800 flex items-center justify-center p-6"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"text-center max-w-2xl"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ y: </span><span class="s7">30</span><span class="s2">, opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ y: </span><span class="s7">0</span><span class="s2">, opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>transition={{ delay: </span><span class="s7">0.2</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>className=</span><span class="s4">"mb-8"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">BookOpen</span><span class="s5"> className=</span><span class="s2">"w-16 h-16 text-purple-300 mx-auto mb-4"</span><span class="s5"> /&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;h1 className=</span><span class="s2">"text-6xl font-serif italic text-white mb-4"</span><span class="s5">&gt;</span><span class="s3">Processing</span><span class="s5">&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s4">"text-xl text-purple-200"</span><span class="s2">&gt;</span><span class="s3">The</span><span class="s2"> </span><span class="s3">Emotional</span><span class="s2"> </span><span class="s3">Healing</span><span class="s2"> </span><span class="s3">Behind</span><span class="s2"> </span><span class="s3">Words</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ y: </span><span class="s7">30</span><span class="s2">, opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ y: </span><span class="s7">0</span><span class="s2">, opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>transition={{ delay: </span><span class="s7">0.5</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>className=</span><span class="s4">"mb-8"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s2">"text-lg text-gray-300 leading-relaxed mb-6"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s3">An</span><span class="s2"> introspective journey through your emotional landscapes.<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s3">Move</span><span class="s2"> through realms </span><span class="s1">of</span><span class="s2"> feeling and use your words to transform pain into power,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>introspection into liberation.</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s4">"text-gray-400"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s3">This</span><span class="s2"> is not a game about winning. </span><span class="s3">It</span><span class="s4">'s about feeling, expressing, and healing.</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ y: </span><span class="s7">30</span><span class="s2">, opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ y: </span><span class="s7">0</span><span class="s2">, opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>transition={{ delay: </span><span class="s7">0.8</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">Button</span><span class="s2"><span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>onClick={startGame}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>className=</span><span class="s2">"bg-purple-600 hover:bg-purple-500 text-white px-8 py-3 text-lg"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s2">Begin</span><span class="s5"> </span><span class="s2">Your</span><span class="s5"> </span><span class="s2">Journey</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s5"> </span><span class="s2">RealmSelectScreen</span><span class="s5"> = () =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>initial={{ opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>animate={{ opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>className=</span><span class="s2">"min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800 p-6"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s4">"max-w-4xl mx-auto"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ y: </span><span class="s7">30</span><span class="s2">, opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ y: </span><span class="s7">0</span><span class="s2">, opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>className=</span><span class="s4">"text-center mb-12"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;h2 className=</span><span class="s2">"text-4xl font-serif text-white mb-4"</span><span class="s5">&gt;</span><span class="s3">Choose</span><span class="s5"> </span><span class="s3">Your</span><span class="s5"> </span><span class="s3">Realm</span><span class="s5">&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s4">"text-gray-300"</span><span class="s2">&gt;</span><span class="s3">Each</span><span class="s2"> realm represents a different emotional landscape to explore&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"grid md:grid-cols-3 gap-8"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>{emotionalRealms.map((realm, index) =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>key={realm.id}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>initial={{ y: </span><span class="s7">50</span><span class="s2">, opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>animate={{ y: </span><span class="s7">0</span><span class="s2">, opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>transition={{ delay: index * </span><span class="s7">0.2</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>className={</span><span class="s2">`bg-gradient-to-br </span><span class="s5">${realm.color}</span><span class="s2"> rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer group`</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>onClick={() =&gt; enterRealm(realm)}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>&lt;realm.icon className=</span><span class="s2">"w-12 h-12 text-white mb-4 group-hover:scale-110 transition-transform"</span><span class="s5"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;h3 className=</span><span class="s4">"text-xl font-semibold text-white mb-3"</span><span class="s2">&gt;{realm.name}&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;p className=</span><span class="s4">"text-gray-200 mb-4"</span><span class="s2">&gt;{realm.description}&lt;/p&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">              </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{realmProgress[realm.id] &amp;&amp; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s4">"text-sm text-white/70"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span></span><span class="s3">Progress</span><span class="s2">: {realmProgress[realm.id]} words written</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>)}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">              </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s4">"mt-4 text-white/60 text-sm"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span></span><span class="s3">Click</span><span class="s2"> to enter </span><span class="s9">→</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>{userWords.length &gt; </span><span class="s7">0</span><span class="s2"> &amp;&amp; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>initial={{ y: </span><span class="s7">30</span><span class="s2">, opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>animate={{ y: </span><span class="s7">0</span><span class="s2">, opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>className=</span><span class="s2">"mt-12 bg-white/5 rounded-2xl p-6"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;h3 className=</span><span class="s2">"text-xl font-semibold text-white mb-4"</span><span class="s5">&gt;</span><span class="s3">Your</span><span class="s5"> </span><span class="s3">Journey</span><span class="s5"> </span><span class="s3">So</span><span class="s5"> </span><span class="s3">Far</span><span class="s5">&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s4">"grid gap-4"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{userWords.map((word, index) =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div key={index} className=</span><span class="s4">"bg-white/10 rounded-lg p-4"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s4">"text-sm text-gray-300 mb-2"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>{emotionalRealms.find(r =&gt; r.id === word.realmId)?.name}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s4">"text-white italic"</span><span class="s2">&gt;</span><span class="s4">"{word.text}"</span><span class="s2">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>)}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> </span><span class="s3">PromptScreen</span><span class="s2"> = () =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>initial={{ opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>animate={{ opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>className={</span><span class="s2">`min-h-screen bg-gradient-to-br </span><span class="s5">${currentRealm.color}</span><span class="s2"> flex items-center justify-center p-6`</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s4">"max-w-2xl w-full"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ y: </span><span class="s7">30</span><span class="s2">, opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ y: </span><span class="s7">0</span><span class="s2">, opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>className=</span><span class="s2">"bg-black/30 backdrop-blur-sm rounded-2xl p-8 border border-white/20"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s4">"text-center mb-8"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;currentRealm.icon className=</span><span class="s4">"w-12 h-12 text-white mx-auto mb-4"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;h2 className=</span><span class="s4">"text-3xl font-serif text-white mb-2"</span><span class="s2">&gt;{currentPrompt.title}&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p className=</span><span class="s4">"text-gray-200"</span><span class="s2">&gt;{currentRealm.name}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s4">"mb-8"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;p className=</span><span class="s2">"text-lg text-gray-100 leading-relaxed mb-6"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{currentPrompt.text}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Textarea</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>value={promptText}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>onChange={(e) =&gt; setPromptText(e.target.value)}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>placeholder=</span><span class="s4">"Write your truth here..."</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>className=</span><span class="s2">"bg-white/10 border-white/30 text-white placeholder-gray-300 focus:border-white/50 focus:ring-white/30 min-h-[120px]"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>autoFocus</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>/&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s4">"flex justify-between"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Button</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>onClick={returnToRealmSelect}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>variant=</span><span class="s4">"outline"</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>className=</span><span class="s2">"bg-transparent border-white/30 text-white hover:bg-white/10"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s3">Return</span><span class="s2"> to </span><span class="s3">Realms</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Button</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>onClick={submitPrompt}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>disabled={!promptText.trim()}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>className=</span><span class="s2">"bg-white/20 hover:bg-white/30 text-white disabled:opacity-50"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s3">Continue</span><span class="s2"> </span><span class="s3">Journey</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s5"> </span><span class="s2">RealmCompleteScreen</span><span class="s5"> = () =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>initial={{ opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>animate={{ opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>className={</span><span class="s2">`min-h-screen bg-gradient-to-br </span><span class="s5">${currentRealm.color}</span><span class="s2"> flex items-center justify-center p-6`</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"max-w-2xl w-full text-center"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ y: </span><span class="s7">30</span><span class="s2">, opacity: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ y: </span><span class="s7">0</span><span class="s2">, opacity: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>className=</span><span class="s2">"bg-black/30 backdrop-blur-sm rounded-2xl p-8 border border-white/20"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;currentRealm.icon className=</span><span class="s4">"w-16 h-16 text-white mx-auto mb-6"</span><span class="s2"> /&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;h2 className=</span><span class="s2">"text-4xl font-serif text-white mb-4"</span><span class="s5">&gt;</span><span class="s3">Realm</span><span class="s5"> </span><span class="s3">Complete</span><span class="s5">&lt;/h2&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s2">"text-xl text-gray-200 mb-8"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s3">You</span><span class="s2"> have journeyed through the {currentRealm.name}.<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s3">Your</span><span class="s2"> words have become bridges across the emotional landscape.</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/p&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"bg-white/10 rounded-lg p-6 mb-8"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;h3 className=</span><span class="s2">"text-lg font-semibold text-white mb-4"</span><span class="s5">&gt;</span><span class="s3">Your</span><span class="s5"> </span><span class="s3">Words</span><span class="s5"> </span><span class="s1">in</span><span class="s5"> </span><span class="s3">This</span><span class="s5"> </span><span class="s3">Realm</span><span class="s5">:&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>{userWords</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>.filter(w =&gt; w.realmId === currentRealm.id)</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>.map((word, index) =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div key={index} className=</span><span class="s4">"text-white italic mb-2"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span></span><span class="s4">"{word.text}"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">Button</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>onClick={returnToRealmSelect}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>className=</span><span class="s2">"bg-white/20 hover:bg-white/30 text-white"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s2">Explore</span><span class="s5"> </span><span class="s2">Another</span><span class="s5"> </span><span class="s2">Realm</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">return</span><span class="s5"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s4">"relative"</span><span class="s2">&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">      </span>&lt;</span><span class="s2">AnimatePresence</span><span class="s5"> mode=</span><span class="s4">"wait"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>{gameState === </span><span class="s4">"intro"</span><span class="s2"> &amp;&amp; &lt;</span><span class="s3">IntroScreen</span><span class="s2"> /&gt;}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>{gameState === </span><span class="s4">"realm_select"</span><span class="s2"> &amp;&amp; &lt;</span><span class="s3">RealmSelectScreen</span><span class="s2"> /&gt;}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>{gameState === </span><span class="s4">"prompt"</span><span class="s2"> &amp;&amp; &lt;</span><span class="s3">PromptScreen</span><span class="s2"> /&gt;}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>{gameState === </span><span class="s4">"realm_complete"</span><span class="s2"> &amp;&amp; &lt;</span><span class="s3">RealmCompleteScreen</span><span class="s2"> /&gt;}</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">      </span>&lt;/</span><span class="s2">AnimatePresence</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p1"><span class="s2">}</span></p>
+</body>
+</html>

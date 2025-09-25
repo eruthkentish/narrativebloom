@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    span.s1 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s2 {font-kerning: none; background-color: #fffffe}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #0f7001; background-color: #fffffe; -webkit-text-stroke: 0px #0f7001}
+    span.s8 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+    span.s9 {font-kerning: none; color: #bf1c25; background-color: #fffffe; -webkit-text-stroke: 0px #bf1c25}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2">, { useState, useEffect } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react"</span><span class="s2">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { motion, </span><span class="s3">AnimatePresence</span><span class="s2"> } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"framer-motion"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Card</span><span class="s5">, </span><span class="s3">CardContent</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/components/ui/card"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Button</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/components/ui/button"</span><span class="s5">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s5"> { </span><span class="s2">BookHeart</span><span class="s5">, </span><span class="s2">Play</span><span class="s5">, </span><span class="s2">Pause</span><span class="s5">, </span><span class="s2">Volume2</span><span class="s5">, </span><span class="s2">VolumeX</span><span class="s5">, </span><span class="s2">Sparkles</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s4">"lucide-react"</span><span class="s5">;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">Player</span><span class="s5"> </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"../components/game/Player"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">UIManager</span><span class="s5"> </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"../components/game/UIManager"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">RealmOfGrief</span><span class="s5"> </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"../components/game/realms/RealmOfGrief"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">MemoryArtifact</span><span class="s5"> </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"../components/game/MemoryArtifact"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">WordBridge</span><span class="s5"> </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"../components/game/WordBridge"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">DissolvingWall</span><span class="s5"> </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"../components/game/DissolvingWall"</span><span class="s5">;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">const</span><span class="s2"> emotionalRealms = [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>{<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>id: </span><span class="s4">'grief'</span><span class="s2">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">'The Valley of Letting Go'</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>description: </span><span class="s2">'Where tears become rivers and loss transforms into acceptance'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">'from-slate-600 to-blue-900'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">symbol</span><span class="s2">: </span><span class="s4">'🌫️'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>{<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>id: </span><span class="s4">'shame'</span><span class="s2">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">'The Shadow Gardens'</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>description: </span><span class="s2">'Where hidden truths bloom in darkness'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">'from-purple-900 to-gray-800'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">symbol</span><span class="s2">: </span><span class="s4">'🌑'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>{<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>id: </span><span class="s2">'abandonment'</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">'The Echoing Chambers'</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>description: </span><span class="s2">'Where silence speaks louder than words'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">'from-gray-700 to-slate-900'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">symbol</span><span class="s2">: </span><span class="s4">'🕳️'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>{<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>id: </span><span class="s2">'forgiveness'</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">'The Healing Springs'</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>description: </span><span class="s2">'Where bitter waters turn sweet'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">'from-emerald-400 to-teal-600'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">symbol</span><span class="s2">: </span><span class="s4">'🌿'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>{<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>id: </span><span class="s4">'hope'</span><span class="s2">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>name: </span><span class="s2">'The Dawn Meadows'</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>description: </span><span class="s2">'Where new light breaks the horizon'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>color: </span><span class="s2">'from-yellow-300 to-orange-500'</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">symbol</span><span class="s2">: </span><span class="s4">'🌅'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s2">];</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s2">export</span><span class="s5"> </span><span class="s2">default</span><span class="s5"> </span><span class="s2">function</span><span class="s5"> </span><span class="s3">ProcessingGame</span><span class="s5">() {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [gameState, setGameState] = useState(</span><span class="s4">'menu'</span><span class="s2">); </span><span class="s7">// menu, playing, paused, realm-select</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [currentRealm, setCurrentRealm] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [playerProgress, setPlayerProgress] = useState({</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span>realmsUnlocked: [</span><span class="s4">'grief'</span><span class="s5">], </span><span class="s2">// Start with grief realm</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>artifacts: [],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>writtenWords: </span><span class="s8">0</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>emotionalJourney: []</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>});</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [soundEnabled, setSoundEnabled] = useState(</span><span class="s1">true</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [isLoading, setIsLoading] = useState(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> startGame = () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setGameState(</span><span class="s4">'realm-select'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> enterRealm = (realmId) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setIsLoading(</span><span class="s1">true</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setCurrentRealm(realmId);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setTimeout(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setIsLoading(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setGameState(</span><span class="s4">'playing'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}, </span><span class="s8">2000</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> exitToMenu = () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setCurrentRealm(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setGameState(</span><span class="s4">'menu'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> renderMainMenu = () =&gt; (</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s2">"min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 flex items-center justify-center p-6"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"absolute inset-0 overflow-hidden"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/20 to-transparent animate-pulse"</span><span class="s5"> /&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width="</span><span class="s8">60</span><span class="s2">" height="</span><span class="s8">60</span><span class="s2">" viewBox="</span><span class="s8">0</span><span class="s5"> </span><span class="s8">0</span><span class="s5"> </span><span class="s8">60</span><span class="s5"> </span><span class="s8">60</span><span class="s2">" xmlns="</span><span class="s5">http://www.w3.org/</span><span class="s8">2000</span><span class="s5">/svg</span><span class="s2">"%3E%3Cg fill="</span><span class="s5">none</span><span class="s2">" fill-rule="</span><span class="s5">evenodd</span><span class="s2">"%3E%3Cg fill="</span><span class="s5">%</span><span class="s8">23</span><span class="s5">ffffff</span><span class="s2">" fill-opacity="</span><span class="s8">0.05</span><span class="s2">"%3E%3Ccircle cx="</span><span class="s8">30</span><span class="s2">" cy="</span><span class="s8">30</span><span class="s2">" r="</span><span class="s8">2</span><span class="s2">"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"</span><span class="s5"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2">, y: </span><span class="s8">30</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2">, y: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>transition={{ duration: </span><span class="s8">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>className=</span><span class="s4">"text-center z-10"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s4">"mb-8"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>animate={{<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>rotate: [</span><span class="s8">0</span><span class="s2">, </span><span class="s8">5</span><span class="s2">, -</span><span class="s8">5</span><span class="s2">, </span><span class="s8">0</span><span class="s2">],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>scale: [</span><span class="s8">1</span><span class="s2">, </span><span class="s8">1.05</span><span class="s2">, </span><span class="s8">1</span><span class="s2">]</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>}}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>transition={{<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>duration: </span><span class="s8">4</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>repeat: </span><span class="s3">Infinity</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>repeatType: </span><span class="s4">"reverse"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>}}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>className=</span><span class="s2">"w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">BookHeart</span><span class="s2"> className=</span><span class="s4">"w-12 h-12 text-white"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.h1</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>transition={{ delay: </span><span class="s8">0.5</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>className=</span><span class="s2">"text-6xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s3">Processing</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.h1&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.p</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>transition={{ delay: </span><span class="s8">0.7</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>className=</span><span class="s2">"text-xl text-purple-200 mb-4 max-w-2xl mx-auto italic"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s3">A</span><span class="s2"> narrative exploration </span><span class="s1">of</span><span class="s2"> the emotional self</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.p&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.p</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>transition={{ delay: </span><span class="s8">0.9</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>className=</span><span class="s2">"text-lg text-purple-300/80 mb-12 max-w-3xl mx-auto leading-relaxed"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s3">Journey</span><span class="s2"> through dreamlike realms </span><span class="s1">of</span><span class="s2"> emotion. </span><span class="s3">Write</span><span class="s2"> your story. </span><span class="s3">Transform</span><span class="s2"> pain into power.<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span></span><span class="s3">This</span><span class="s5"> is not about winning</span><span class="s9">—</span><span class="s5">it</span><span class="s2">'s about feeling, expressing, and healing.</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.p&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2">, y: </span><span class="s8">20</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2">, y: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>transition={{ delay: </span><span class="s8">1.1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>className=</span><span class="s4">"space-y-4"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">Button</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>onClick={startGame}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>className=</span><span class="s2">"bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-12 py-4 rounded-2xl text-lg font-medium shadow-2xl transform hover:scale-105 transition-all duration-300"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Play</span><span class="s2"> className=</span><span class="s4">"mr-3 w-5 h-5"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s3">Begin</span><span class="s2"> </span><span class="s3">Journey</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"flex justify-center space-x-4 mt-8"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;button</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>onClick={() =&gt; setSoundEnabled(!soundEnabled)}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>className=</span><span class="s2">"p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{soundEnabled ? &lt;</span><span class="s3">Volume2</span><span class="s2"> className=</span><span class="s4">"w-5 h-5"</span><span class="s2"> /&gt; : &lt;</span><span class="s3">VolumeX</span><span class="s2"> className=</span><span class="s4">"w-5 h-5"</span><span class="s2"> /&gt;}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> renderRealmSelect = () =&gt; (</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s2">"min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 py-12"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"max-w-6xl mx-auto px-6"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2">, y: -</span><span class="s8">30</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2">, y: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>className=</span><span class="s4">"text-center mb-16"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;h2 className=</span><span class="s2">"text-4xl font-serif font-bold text-white mb-4"</span><span class="s5">&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s2">Choose</span><span class="s5"> </span><span class="s2">Your</span><span class="s5"> </span><span class="s2">Emotional</span><span class="s5"> </span><span class="s2">Realm</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/h2&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s2">"text-purple-200 text-lg"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s3">Each</span><span class="s2"> realm represents a different landscape </span><span class="s1">of</span><span class="s2"> the heart</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"grid md:grid-cols-2 lg:grid-cols-3 gap-8"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>{emotionalRealms.map((realm, index) =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>key={realm.id}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2">, y: </span><span class="s8">50</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2">, y: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>transition={{ delay: index * </span><span class="s8">0.1</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>className={</span><span class="s2">`relative overflow-hidden rounded-3xl </span><span class="s5">${</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>playerProgress.realmsUnlocked.includes(realm.id)<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>? </span><span class="s4">'cursor-pointer'</span><span class="s2"><span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                  </span>: </span><span class="s2">'cursor-not-allowed opacity-50'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>}</span><span class="s4">`</span><span class="s2">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>onClick={() =&gt; playerProgress.realmsUnlocked.includes(realm.id) &amp;&amp; enterRealm(realm.id)}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">Card</span><span class="s5"> className={</span><span class="s2">`bg-gradient-to-br </span><span class="s5">${realm.color}</span><span class="s2"> border-none text-white hover:shadow-2xl transition-all duration-500 transform hover:scale-105 group`</span><span class="s5">}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">CardContent</span><span class="s2"> className=</span><span class="s4">"p-8 text-center relative"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s2">"absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"</span><span class="s5"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s4">"relative z-10"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;div className=</span><span class="s4">"text-4xl mb-4"</span><span class="s2">&gt;{realm.</span><span class="s1">symbol</span><span class="s2">}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;h3 className=</span><span class="s4">"text-xl font-bold mb-3"</span><span class="s2">&gt;{realm.name}&lt;/h3&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                    </span>&lt;p className=</span><span class="s2">"text-white/80 text-sm leading-relaxed mb-4"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>{realm.description}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>{!playerProgress.realmsUnlocked.includes(realm.id) &amp;&amp; (</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                      </span>&lt;div className=</span><span class="s2">"absolute inset-0 bg-black/60 flex items-center justify-center rounded-3xl"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;p className=</span><span class="s4">"text-white/80 text-sm"</span><span class="s2">&gt;</span><span class="s3">Realm</span><span class="s2"> </span><span class="s3">Locked</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>)}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/</span><span class="s3">CardContent</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/</span><span class="s3">Card</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s4">"text-center mt-12"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">Button</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>onClick={exitToMenu}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>variant=</span><span class="s4">"outline"</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>className=</span><span class="s2">"border-purple-400 text-purple-300 hover:bg-purple-400/10"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s3">Return</span><span class="s2"> to </span><span class="s3">Menu</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> renderLoading = () =&gt; (</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s2">"min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 flex items-center justify-center"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>initial={{ opacity: </span><span class="s8">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>animate={{ opacity: </span><span class="s8">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>className=</span><span class="s4">"text-center"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>animate={{ rotate: </span><span class="s8">360</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>transition={{ duration: </span><span class="s8">2</span><span class="s2">, repeat: </span><span class="s3">Infinity</span><span class="s2">, ease: </span><span class="s4">"linear"</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>className=</span><span class="s2">"w-16 h-16 border-4 border-purple-400 border-t-transparent rounded-full mx-auto mb-8"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>/&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>&lt;h3 className=</span><span class="s2">"text-2xl font-serif text-white mb-4"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s3">Entering</span><span class="s2"> the {emotionalRealms.find(r =&gt; r.id === currentRealm)?.name}...</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;p className=</span><span class="s4">"text-purple-300"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s3">Preparing</span><span class="s2"> your emotional landscape</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> renderGame = () =&gt; (</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s2">"relative min-h-screen overflow-hidden"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{currentRealm === </span><span class="s4">'grief'</span><span class="s2"> &amp;&amp; &lt;</span><span class="s3">RealmOfGrief</span><span class="s2"> /&gt;}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">      </span>&lt;</span><span class="s2">UIManager</span><span class="s5"><span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>playerProgress={playerProgress}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>currentRealm={currentRealm}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>onExit={exitToMenu}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>soundEnabled={soundEnabled}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setSoundEnabled={setSoundEnabled}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>/&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;</span><span class="s3">Player</span><span class="s2"><span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>realm={currentRealm}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>progress={playerProgress}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setProgress={setPlayerProgress}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>/&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">return</span><span class="s5"> (</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">    </span>&lt;</span><span class="s2">AnimatePresence</span><span class="s5"> mode=</span><span class="s4">"wait"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{gameState === </span><span class="s4">'menu'</span><span class="s2"> &amp;&amp; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div key=</span><span class="s4">"menu"</span><span class="s2"> exit={{ opacity: </span><span class="s8">0</span><span class="s2"> }}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>{renderMainMenu()}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>)}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{gameState === </span><span class="s4">'realm-select'</span><span class="s2"> &amp;&amp; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div key=</span><span class="s4">"realm-select"</span><span class="s2"> exit={{ opacity: </span><span class="s8">0</span><span class="s2"> }}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>{renderRealmSelect()}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>)}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{isLoading &amp;&amp; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div key=</span><span class="s4">"loading"</span><span class="s2"> exit={{ opacity: </span><span class="s8">0</span><span class="s2"> }}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>{renderLoading()}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>)}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{gameState === </span><span class="s4">'playing'</span><span class="s2"> &amp;&amp; !isLoading &amp;&amp; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;motion.div key=</span><span class="s4">"playing"</span><span class="s2"> initial={{ opacity: </span><span class="s8">0</span><span class="s2"> }} animate={{ opacity: </span><span class="s8">1</span><span class="s2"> }}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>{renderGame()}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>)}</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">    </span>&lt;/</span><span class="s2">AnimatePresence</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p1"><span class="s2">}</span></p>
+</body>
+</html>

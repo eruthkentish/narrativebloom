@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    span.s1 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s2 {font-kerning: none; background-color: #fffffe}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2">, { useState, useEffect } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">'react'</span><span class="s2">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { motion, </span><span class="s3">AnimatePresence</span><span class="s2"> } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">'framer-motion'</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Card</span><span class="s5">, </span><span class="s3">CardContent</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">'@/components/ui/card'</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Button</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">'@/components/ui/button'</span><span class="s5">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s5"> { </span><span class="s2">Heart</span><span class="s5">, </span><span class="s2">Phone</span><span class="s5">, </span><span class="s2">MessageSquare</span><span class="s5">, </span><span class="s2">ExternalLink</span><span class="s5">, </span><span class="s2">X</span><span class="s5">, </span><span class="s2">AlertTriangle</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s4">'lucide-react'</span><span class="s5">;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p3"><span class="s1">const</span><span class="s5"> </span><span class="s2">CRISIS_KEYWORDS</span><span class="s5"> = {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>suicide: {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>keywords: [</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">'suicide'</span><span class="s5">, </span><span class="s2">'kill myself'</span><span class="s5">, </span><span class="s2">'want to die'</span><span class="s5">, </span><span class="s2">'end it all'</span><span class="s5">, </span><span class="s2">'no point living'</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">'better off dead'</span><span class="s5">, </span><span class="s2">'take my own life'</span><span class="s5">, </span><span class="s2">'overdose'</span><span class="s5">, </span><span class="s2">'self-harm'</span><span class="s5">, </span><span class="s2">'cutting'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">'suicidal'</span><span class="s5">, </span><span class="s2">'killing myself'</span><span class="s5">, </span><span class="s2">'end my life'</span><span class="s5">, </span><span class="s2">'don\'t want to live'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">'wish I was dead'</span><span class="s5">, </span><span class="s2">'want to disappear forever'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>priority: </span><span class="s7">1</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>type: </span><span class="s4">'popup'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>sexual_assault: {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>keywords: [</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">'rape'</span><span class="s5">, </span><span class="s2">'raped'</span><span class="s5">, </span><span class="s2">'sexual assault'</span><span class="s5">, </span><span class="s2">'molested'</span><span class="s5">, </span><span class="s2">'forced sex'</span><span class="s5">, </span><span class="s2">'sexual abuse'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">'touched inappropriately'</span><span class="s5">, </span><span class="s2">'sexually abused'</span><span class="s5">, </span><span class="s2">'assaulted sexually'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">'non-consensual'</span><span class="s5">, </span><span class="s2">'forced me to'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>priority: </span><span class="s7">3</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>type: </span><span class="s4">'banner'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>domestic_violence: {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>keywords: [</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">'beat me up'</span><span class="s5">, </span><span class="s2">'got hit'</span><span class="s5">, </span><span class="s2">'domestic violence'</span><span class="s5">, </span><span class="s2">'he hit me'</span><span class="s5">, </span><span class="s2">'she hit me'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">'abusive partner'</span><span class="s5">, </span><span class="s2">'beats me'</span><span class="s5">, </span><span class="s2">'violence at home'</span><span class="s5">, </span><span class="s2">'physically abused'</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">'partner hits me'</span><span class="s5">, </span><span class="s2">'spouse hits me'</span><span class="s5">, </span><span class="s2">'boyfriend hit me'</span><span class="s5">, </span><span class="s2">'girlfriend hit me'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>priority: </span><span class="s7">2</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>type: </span><span class="s4">'banner'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s2">};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p3"><span class="s1">const</span><span class="s5"> </span><span class="s2">SAFETY_RESOURCES</span><span class="s5"> = {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>suicide: {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>title: </span><span class="s2">"It looks like you're struggling with thoughts of ending your life."</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>message: </span><span class="s2">"You are not alone, and help is available right now."</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>urgent: </span><span class="s1">true</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>resources: [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>name: </span><span class="s2">"988 Suicide &amp; Crisis Lifeline"</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>number: </span><span class="s4">"988 (U.S.)"</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>url: </span><span class="s4">"tel:988"</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>description: </span><span class="s2">"24/7 confidential support"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>name: </span><span class="s2">"Crisis Text Line"</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>number: </span><span class="s2">"Text HOME to 741741"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>url: </span><span class="s2">"sms:741741?body=HOME"</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>description: </span><span class="s4">"24/7 text support"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>]</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>sexual_assault: {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>title: </span><span class="s2">"Writing about sexual violence can be very painful."</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>message: </span><span class="s2">"You deserve support. Here are safe places to reach out."</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>urgent: </span><span class="s1">false</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>resources: [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>name: </span><span class="s2">"RAINN Sexual Assault Hotline"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>number: </span><span class="s2">"1-800-656-HOPE (4673)"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>url: </span><span class="s2">"tel:18006564673"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>description: </span><span class="s2">"Confidential support for survivors"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>name: </span><span class="s2">"RAINN Live Chat"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>number: </span><span class="s2">"Online Chat Available"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>url: </span><span class="s2">"https://www.rainn.org/get-help"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>description: </span><span class="s2">"Anonymous online support"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>]</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>domestic_violence: {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>title: </span><span class="s2">"If you are in a situation of violence, you don't have to face it alone."</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>message: </span><span class="s2">"There are safe spaces to talk and get help."</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>urgent: </span><span class="s1">false</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>resources: [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>name: </span><span class="s2">"National Domestic Violence Hotline"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>number: </span><span class="s2">"1-800-799-SAFE (7233)"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>url: </span><span class="s2">"tel:18007997233"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>description: </span><span class="s2">"24/7 confidential support for domestic violence"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>{</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>name: </span><span class="s2">"Live Chat Support"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>number: </span><span class="s2">"Online Chat Available"</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>url: </span><span class="s2">"https://www.thehotline.org/get-help/"</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>description: </span><span class="s2">"Anonymous online support"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>]</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s2">};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">export</span><span class="s2"> </span><span class="s1">default</span><span class="s2"> </span><span class="s1">function</span><span class="s2"> </span><span class="s3">SafetyNet</span><span class="s2">({ content, onDismiss }) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [detectedCategories, setDetectedCategories] = useState([]);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [activePopup, setActivePopup] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [activeBanners, setActiveBanners] = useState([]);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (!content) </span><span class="s1">return</span><span class="s2">;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">    </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> contentLower = content.toLowerCase();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> detected = [];</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">    </span></span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s2">// Check all categories for keyword matches</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">Object</span><span class="s2">.entries(</span><span class="s3">CRISIS_KEYWORDS</span><span class="s2">).forEach(([category, config]) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">const</span><span class="s2"> hasMatch = config.keywords.some(keyword =&gt;<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>contentLower.includes(keyword.toLowerCase())</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>);</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">if</span><span class="s2"> (hasMatch) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>detected.push({</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>category,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>priority: config.priority,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>type: config.type</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>});</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>});</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">    </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (detected.length &gt; </span><span class="s7">0</span><span class="s2">) {</span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">// Sort by priority (1 = highest)</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>detected.sort((a, b) =&gt; a.priority - b.priority);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setDetectedCategories(detected);</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">// Show highest priority popup if any</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">const</span><span class="s2"> popupCategory = detected.find(d =&gt; d.type === </span><span class="s4">'popup'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">if</span><span class="s2"> (popupCategory &amp;&amp; (!activePopup || activePopup !== popupCategory.category)) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setActivePopup(popupCategory.category);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">// Show all banner categories</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">const</span><span class="s2"> bannerCategories = detected.filter(d =&gt; d.type === </span><span class="s4">'banner'</span><span class="s2">).map(d =&gt; d.category);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setActiveBanners(prev =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">const</span><span class="s2"> newBanners = [...</span><span class="s1">new</span><span class="s2"> </span><span class="s3">Set</span><span class="s2">([...prev, ...bannerCategories])];</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">return</span><span class="s2"> newBanners;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>});</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>} </span><span class="s1">else</span><span class="s2"> {</span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">// No matches found, clear everything</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setDetectedCategories([]);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setActivePopup(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setActiveBanners([]);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, [content, activePopup]);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> handlePopupDismiss = () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setActivePopup(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (onDismiss) onDismiss();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> handleBannerDismiss = (category) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setActiveBanners(prev =&gt; prev.filter(c =&gt; c !== category));</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">// Popup Component (Interruptive)</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> </span><span class="s3">SafetyPopup</span><span class="s2"> = ({ category }) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> safetyInfo = </span><span class="s3">SAFETY_RESOURCES</span><span class="s2">[category];</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (!safetyInfo) </span><span class="s1">return</span><span class="s2"> </span><span class="s1">null</span><span class="s2">;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>initial={{ opacity: </span><span class="s7">0</span><span class="s2">, scale: </span><span class="s7">0.95</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>animate={{ opacity: </span><span class="s7">1</span><span class="s2">, scale: </span><span class="s7">1</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>exit={{ opacity: </span><span class="s7">0</span><span class="s2">, scale: </span><span class="s7">0.95</span><span class="s2"> }}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>className=</span><span class="s2">"fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>&lt;</span><span class="s3">Card</span><span class="s5"> className=</span><span class="s2">"max-w-lg w-full bg-white"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">CardContent</span><span class="s2"> className=</span><span class="s4">"p-6"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"flex items-center justify-between mb-4"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">AlertTriangle</span><span class="s2"> className=</span><span class="s4">"w-8 h-8 text-red-500"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;button<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>onClick={handlePopupDismiss}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                </span>className=</span><span class="s2">"text-gray-400 hover:text-gray-600"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">X</span><span class="s2"> className=</span><span class="s4">"w-5 h-5"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">            </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;h3 className=</span><span class="s2">"text-xl font-semibold text-red-800 mb-3"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{safetyInfo.title}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p className=</span><span class="s4">"text-gray-700 mb-6"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{safetyInfo.message}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s4">"space-y-4 mb-6"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{safetyInfo.resources.map((resource, index) =&gt; (</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                </span>&lt;div key={index} className=</span><span class="s2">"flex items-center justify-between p-3 bg-gray-50 rounded-lg"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s4">"flex-1"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;div className=</span><span class="s4">"font-medium text-gray-800"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>{resource.name}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;div className=</span><span class="s4">"text-sm text-gray-600"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>{resource.number}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;div className=</span><span class="s4">"text-xs text-gray-500"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>{resource.description}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;a</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>href={resource.url}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>target=</span><span class="s4">"_blank"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>rel=</span><span class="s4">"noopener noreferrer"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;</span><span class="s3">Button</span><span class="s2"> className=</span><span class="s4">"bg-red-600 hover:bg-red-700"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>{resource.url.startsWith(</span><span class="s4">'tel:'</span><span class="s2">) ? (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;</span><span class="s3">Phone</span><span class="s2"> className=</span><span class="s4">"w-4 h-4 mr-2"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>) : resource.url.startsWith(</span><span class="s4">'sms:'</span><span class="s2">) ? (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;</span><span class="s3">MessageSquare</span><span class="s2"> className=</span><span class="s4">"w-4 h-4 mr-2"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>) : (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;</span><span class="s3">ExternalLink</span><span class="s2"> className=</span><span class="s4">"w-4 h-4 mr-2"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>)}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span></span><span class="s3">Get</span><span class="s2"> </span><span class="s3">Help</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/a&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">            </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"flex justify-between items-center pt-4 border-t"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;a</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                </span>href=</span><span class="s2">"https://findahelpline.com"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>target=</span><span class="s4">"_blank"</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                </span>rel=</span><span class="s2">"noopener noreferrer"</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                </span>className=</span><span class="s2">"text-blue-600 text-sm hover:text-blue-800 flex items-center"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">ExternalLink</span><span class="s2"> className=</span><span class="s4">"w-3 h-3 mr-1"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span></span><span class="s3">International</span><span class="s2"> resources</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/a&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">Button</span><span class="s2"> onClick={handlePopupDismiss} variant=</span><span class="s4">"outline"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span></span><span class="s3">Continue</span><span class="s2"> </span><span class="s3">Writing</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">CardContent</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/</span><span class="s3">Card</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">// Banner Component (Non-interruptive)</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> </span><span class="s3">SafetyBanner</span><span class="s2"> = ({ category }) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> safetyInfo = </span><span class="s3">SAFETY_RESOURCES</span><span class="s2">[category];</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (!safetyInfo) </span><span class="s1">return</span><span class="s2"> </span><span class="s1">null</span><span class="s2">;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>initial={{ opacity: </span><span class="s7">0</span><span class="s2">, y: </span><span class="s7">20</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>animate={{ opacity: </span><span class="s7">1</span><span class="s2">, y: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>exit={{ opacity: </span><span class="s7">0</span><span class="s2">, y: </span><span class="s7">20</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>className=</span><span class="s4">"mb-4"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>&lt;</span><span class="s3">Card</span><span class="s5"> className=</span><span class="s2">"bg-amber-50 border-amber-200"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">CardContent</span><span class="s2"> className=</span><span class="s4">"p-4"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"flex items-start justify-between mb-3"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">Heart</span><span class="s5"> className=</span><span class="s2">"w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0"</span><span class="s5"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;button<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>onClick={() =&gt; handleBannerDismiss(category)}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                </span>className=</span><span class="s2">"text-amber-600 hover:text-amber-800 ml-2"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">X</span><span class="s2"> className=</span><span class="s4">"w-4 h-4"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">            </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;h4 className=</span><span class="s2">"font-semibold text-amber-800 mb-2"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{safetyInfo.title}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/h4&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;p className=</span><span class="s2">"text-amber-700 text-sm mb-4"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{safetyInfo.message}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s4">"space-y-2"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{safetyInfo.resources.map((resource, index) =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div key={index} className=</span><span class="s4">"flex items-center justify-between"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s4">"flex-1"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;div className=</span><span class="s4">"font-medium text-amber-800 text-sm"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>{resource.name}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;div className=</span><span class="s4">"text-amber-700 text-xs"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>{resource.number}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;a</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>href={resource.url}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>target=</span><span class="s4">"_blank"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>rel=</span><span class="s4">"noopener noreferrer"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>className=</span><span class="s4">"ml-2"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                    </span>&lt;</span><span class="s3">Button</span><span class="s5"> size=</span><span class="s2">"sm"</span><span class="s5"> variant=</span><span class="s2">"outline"</span><span class="s5"> className=</span><span class="s2">"border-amber-300 text-amber-700 hover:bg-amber-100"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>{resource.url.startsWith(</span><span class="s4">'tel:'</span><span class="s2">) ? (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;</span><span class="s3">Phone</span><span class="s2"> className=</span><span class="s4">"w-3 h-3 mr-1"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>) : resource.url.startsWith(</span><span class="s4">'sms:'</span><span class="s2">) ? (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;</span><span class="s3">MessageSquare</span><span class="s2"> className=</span><span class="s4">"w-3 h-3 mr-1"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>) : (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;</span><span class="s3">ExternalLink</span><span class="s2"> className=</span><span class="s4">"w-3 h-3 mr-1"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>)}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span></span><span class="s3">Get</span><span class="s2"> </span><span class="s3">Help</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/a&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">CardContent</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/</span><span class="s3">Card</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">return</span><span class="s5"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;&gt;</span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">      </span>{</span><span class="s2">/* Popup (Interruptive) */</span><span class="s5">}</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">      </span>&lt;</span><span class="s2">AnimatePresence</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>{activePopup &amp;&amp; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">SafetyPopup</span><span class="s2"> category={activePopup} /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>)}</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">      </span>&lt;/</span><span class="s2">AnimatePresence</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">      </span>{</span><span class="s2">/* Banners (Non-interruptive) */</span><span class="s5">}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"fixed bottom-4 right-4 z-40 max-w-md space-y-2"</span><span class="s5">&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span>&lt;</span><span class="s2">AnimatePresence</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>{activeBanners.map(category =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">SafetyBanner</span><span class="s2"> key={category} category={category} /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>))}</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span>&lt;/</span><span class="s2">AnimatePresence</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p1"><span class="s2">}</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s2">// Helper function to check if content triggers safety net</span></p>
+<p class="p1"><span class="s1">export</span><span class="s2"> </span><span class="s1">const</span><span class="s2"> checkForCrisisContent = (content) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">if</span><span class="s2"> (!content) </span><span class="s1">return</span><span class="s2"> </span><span class="s1">false</span><span class="s2">;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">  </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> contentLower = content.toLowerCase();</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">  </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">return</span><span class="s2"> </span><span class="s3">Object</span><span class="s2">.values(</span><span class="s3">CRISIS_KEYWORDS</span><span class="s2">).some(config =&gt;<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>config.keywords.some(keyword =&gt; contentLower.includes(keyword.toLowerCase()))</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p1"><span class="s2">};</span></p>
+</body>
+</html>

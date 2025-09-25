@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112; min-height: 16.0px}
+    span.s1 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s2 {font-kerning: none; background-color: #fffffe}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #0f7001; background-color: #fffffe; -webkit-text-stroke: 0px #0f7001}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2">, { useEffect, useState } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react"</span><span class="s2">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { </span><span class="s3">Link</span><span class="s2">, useLocation } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react-router-dom"</span><span class="s2">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { createPageUrl } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"@/utils"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">User</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/entities/User"</span><span class="s5">;</span></p>
+<p class="p3"><span class="s2">import</span><span class="s5"> {<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">BookHeart</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s3">Home</span><span class="s2">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">PenTool</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Heart</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Sparkles</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">TrendingUp</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Settings</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Info</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">BookOpen</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Calendar</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Mail</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">LogOut</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Loader2</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Lock</span><span class="s5">,</span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s3">Book</span><span class="s5">, </span><span class="s2">// Added Book icon</span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s3">User</span><span class="s5"> as </span><span class="s3">UserIcon</span><span class="s5"> </span><span class="s2">// Alias User from lucide-react to avoid conflict with entity User</span></p>
+<p class="p2"><span class="s5">} </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"lucide-react"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Button</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/components/ui/button"</span><span class="s5">;</span></p>
+<p class="p6"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">export</span><span class="s2"> </span><span class="s1">default</span><span class="s2"> </span><span class="s1">function</span><span class="s2"> </span><span class="s3">Layout</span><span class="s2">({ children, currentPageName }) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> location = useLocation();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [user, setUser] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [isAuthenticating, setIsAuthenticating] = useState(</span><span class="s1">true</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [hasAccess, setHasAccess] = useState(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p6"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> checkUser = </span><span class="s1">async</span><span class="s2"> () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">try</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">const</span><span class="s2"> currentUser = </span><span class="s1">await</span><span class="s2"> </span><span class="s3">User</span><span class="s2">.me();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setUser(currentUser);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">if</span><span class="s2"> (currentUser.role === </span><span class="s4">'admin'</span><span class="s2">) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>setHasAccess(</span><span class="s1">true</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>} </span><span class="s1">catch</span><span class="s2"> (error) {</span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">// User not logged in, redirect to public home page</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>window.location.href = createPageUrl(</span><span class="s4">'Home'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>} </span><span class="s1">finally</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setIsAuthenticating(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>checkUser();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, []);</span></p>
+<p class="p6"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> handleLogout = </span><span class="s1">async</span><span class="s2"> () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">await</span><span class="s2"> </span><span class="s3">User</span><span class="s2">.logout();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>window.location.href = createPageUrl(</span><span class="s4">'Home'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p6"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> navItems = [</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{ name: </span><span class="s4">"Dashboard"</span><span class="s2">, path: </span><span class="s4">"Dashboard"</span><span class="s2">, icon: </span><span class="s3">Home</span><span class="s2"> },</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>{ name: </span><span class="s2">"Journal"</span><span class="s5">, path: </span><span class="s2">"Dashboard?tab=journal"</span><span class="s5">, icon: </span><span class="s3">Book</span><span class="s5"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{ name: </span><span class="s4">"About"</span><span class="s2">, path: </span><span class="s4">"About"</span><span class="s2">, icon: </span><span class="s3">Info</span><span class="s2"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{ name: </span><span class="s4">"Writing Studio"</span><span class="s2">, path: </span><span class="s4">"WritingStudio"</span><span class="s2">, icon: </span><span class="s3">PenTool</span><span class="s2"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{ name: </span><span class="s4">"Poetry Garden"</span><span class="s2">, path: </span><span class="s4">"PoetryGarden"</span><span class="s2">, icon: </span><span class="s3">Heart</span><span class="s2"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{ name: </span><span class="s4">"Reflection"</span><span class="s2">, path: </span><span class="s4">"Reflection"</span><span class="s2">, icon: </span><span class="s3">Sparkles</span><span class="s2"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{ name: </span><span class="s4">"Progress"</span><span class="s2">, path: </span><span class="s4">"Progress"</span><span class="s2">, icon: </span><span class="s3">TrendingUp</span><span class="s2"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{ name: </span><span class="s4">"Publishing"</span><span class="s2">, path: </span><span class="s4">"Publishing"</span><span class="s2">, icon: </span><span class="s3">BookOpen</span><span class="s2"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{ name: </span><span class="s4">"Workshops"</span><span class="s2">, path: </span><span class="s4">"Workshops"</span><span class="s2">, icon: </span><span class="s3">Calendar</span><span class="s2"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{ name: </span><span class="s4">"Founder"</span><span class="s2">, path: </span><span class="s4">"Founder"</span><span class="s2">, icon: </span><span class="s3">UserIcon</span><span class="s2"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>{ name: </span><span class="s4">"Contact"</span><span class="s2">, path: </span><span class="s4">"Contact"</span><span class="s2">, icon: </span><span class="s3">Mail</span><span class="s2"> }</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>];</span></p>
+<p class="p6"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">if</span><span class="s2"> (isAuthenticating) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-emerald-50 flex items-center justify-center"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>&lt;</span><span class="s3">Loader2</span><span class="s5"> className=</span><span class="s2">"w-12 h-12 animate-spin text-rose-500"</span><span class="s5"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p6"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">if</span><span class="s2"> (!hasAccess) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"min-h-screen bg-slate-100 flex items-center justify-center"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"text-center p-8 bg-white rounded-2xl shadow-lg max-w-md mx-auto"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">Lock</span><span class="s5"> className=</span><span class="s2">"w-16 h-16 text-red-500 mx-auto mb-6"</span><span class="s5"> /&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;h1 className=</span><span class="s2">"text-3xl font-bold text-slate-800 mb-4"</span><span class="s5">&gt;</span><span class="s3">Access</span><span class="s5"> </span><span class="s3">Denied</span><span class="s5">&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s4">"text-slate-600 mb-8"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s3">You</span><span class="s2"> </span><span class="s1">do</span><span class="s2"> not have permission to view </span><span class="s1">this</span><span class="s2"> page. </span><span class="s3">This</span><span class="s2"> area is restricted to administrators only.</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/p&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"flex gap-4 justify-center"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Link</span><span class="s2"> to={createPageUrl(</span><span class="s4">"Home"</span><span class="s2">)}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">Button</span><span class="s2"> variant=</span><span class="s4">"outline"</span><span class="s2">&gt;</span><span class="s3">Go</span><span class="s2"> to </span><span class="s3">Homepage</span><span class="s2">&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/</span><span class="s3">Link</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Button</span><span class="s2"> onClick={handleLogout}&gt;</span><span class="s3">Logout</span><span class="s2">&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p6"><span class="s6"></span><br></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">return</span><span class="s5"> (</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s2">"min-h-screen bg-slate-50"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>{</span><span class="s4">`</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Crimson+Text:ital,wght@0,400;0,600;1,400&amp;display=swap');</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>:root {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>--primary-blue: #2563eb;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>--primary-slate: #475569;<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>--primary-emerald: #10b981;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>--text-primary: #1f2937;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>--text-secondary: #6b7280;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>--bg-card: rgba(255, 255, 255, 0.8);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>--shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.05);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>--shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.1);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>--border-subtle: rgba(0, 0, 0, 0.08);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>body {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>color: var(--text-primary);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>line-height: 1.7;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>letter-spacing: -0.01em;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>.font-serif {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>font-family: 'Crimson Text', Georgia, serif;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>.gradient-text {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, var(--primary-blue), var(--primary-slate));</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>-webkit-background-clip: text;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>-webkit-text-fill-color: transparent;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>background-clip: text;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>.card-therapy {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>background: var(--bg-card);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>border-radius: 24px;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>border: 1px solid var(--border-subtle);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>backdrop-filter: blur(20px);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>box-shadow: var(--shadow-soft);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>.btn-therapy {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>background: var(--primary-blue);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>border: none;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>border-radius: 16px;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>padding: 14px 28px;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>font-weight: 600;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>font-size: 15px;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 25px rgba(37, 99, 235, 0.2);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>.btn-therapy:hover {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>box-shadow: 0 12px 35px rgba(37, 99, 235, 0.3);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>.nav-item {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>border-radius: 12px;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>.nav-item:hover {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>background: rgba(0, 0, 0, 0.04);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>transform: translateY(-1px);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>.nav-item.active {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>background: var(--primary-blue);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 25px rgba(37, 99, 235, 0.25);</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p7"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>@media (max-width: 768px) {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>.nav-item {</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">              </span>border-radius: 8px;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">              </span>font-size: 12px;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">        </span>`</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/style&gt;</span></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">      </span>{</span><span class="s2">/* Navigation */</span><span class="s5">}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;nav className=</span><span class="s2">"bg-white/60 backdrop-blur-xl border-b border-black/5 sticky top-0 z-50"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"max-w-7xl mx-auto px-6 py-4"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"flex items-center justify-between"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Link</span><span class="s2"> to={createPageUrl(</span><span class="s4">"Dashboard"</span><span class="s2">)} className=</span><span class="s4">"flex items-center space-x-3"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"w-12 h-12 bg-gradient-to-br from-blue-500 to-slate-700 rounded-2xl flex items-center justify-center shadow-lg"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">BookHeart</span><span class="s2"> className=</span><span class="s4">"w-6 h-6 text-white"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;div&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                </span>&lt;h1 className=</span><span class="s2">"text-2xl font-bold gradient-text font-serif"</span><span class="s5">&gt;</span><span class="s3">Narrative</span><span class="s5"> </span><span class="s3">Bloom</span><span class="s5">&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;p className=</span><span class="s4">"text-xs text-gray-500 font-medium"</span><span class="s2">&gt;</span><span class="s3">Healing</span><span class="s2"> </span><span class="s3">Through</span><span class="s2"> </span><span class="s3">Words</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/</span><span class="s3">Link</span><span class="s2">&gt;</span></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">            </span></span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"hidden xl:flex items-center space-x-1"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{navItems.map((item) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span></span><span class="s1">const</span><span class="s2"> isActive = location.pathname.includes(item.path);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;</span><span class="s3">Link</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>key={item.path}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>to={createPageUrl(item.path)}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                    </span>className={</span><span class="s2">`nav-item flex items-center space-x-2 px-3 py-2 text-sm font-medium transition-all </span><span class="s5">${</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>isActive</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>? </span><span class="s4">'active text-white'</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                        </span>: </span><span class="s2">'text-gray-600 hover:text-gray-800'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>}</span><span class="s4">`</span><span class="s2">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;item.icon className=</span><span class="s4">"w-4 h-4"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;span&gt;{item.name}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/</span><span class="s3">Link</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>})}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p6"><span class="s6"></span><br></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"flex items-center space-x-3"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>&lt;button onClick={handleLogout} className=</span><span class="s2">"w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-xl flex items-center justify-center transition-colors"</span><span class="s5"> title=</span><span class="s2">"Logout"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">LogOut</span><span class="s2"> className=</span><span class="s4">"w-4 h-4 text-gray-600"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/button&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>&lt;button className=</span><span class="s2">"w-10 h-10 bg-gradient-to-br from-blue-500 to-slate-600 rounded-xl flex items-center justify-center shadow-md hover:shadow-lg transition-all"</span><span class="s5"> title={user?.email}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">UserIcon</span><span class="s2"> className=</span><span class="s4">"w-4 h-4 text-white"</span><span class="s2"> /&gt; {</span><span class="s7">/* Use aliased UserIcon */</span><span class="s2">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">          </span>{</span><span class="s2">/* Mobile Navigation */</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s4">"xl:hidden mt-4"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"flex space-x-1 overflow-x-auto pb-2"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{navItems.map((item) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span></span><span class="s1">const</span><span class="s2"> isActive = location.pathname.includes(item.path);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;</span><span class="s3">Link</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>key={item.path}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>to={createPageUrl(item.path)}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                    </span>className={</span><span class="s2">`nav-item flex items-center space-x-1 px-2 py-1.5 text-xs font-medium whitespace-nowrap </span><span class="s5">${</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>isActive</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>? </span><span class="s4">'active text-white'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>: </span><span class="s4">'text-gray-600'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>}</span><span class="s4">`</span><span class="s2">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;item.icon className=</span><span class="s4">"w-3 h-3"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;span&gt;{item.name}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/</span><span class="s3">Link</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>})}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/nav&gt;</span></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;main&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>{children}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/main&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p1"><span class="s2">}</span></p>
+</body>
+</html>

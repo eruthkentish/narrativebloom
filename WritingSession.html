@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    span.s1 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s2 {font-kerning: none; background-color: #fffffe}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+    span.s8 {font-kerning: none; color: #0f7001; background-color: #fffffe; -webkit-text-stroke: 0px #0f7001}
+    span.s9 {font-kerning: none; color: #6b0001; background-color: #fffffe; -webkit-text-stroke: 0px #6b0001}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2">, { useState, useEffect, useCallback, useMemo } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react"</span><span class="s2">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { motion, </span><span class="s3">AnimatePresence</span><span class="s2"> } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"framer-motion"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">Button</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/components/ui/button"</span><span class="s5">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s5"> { </span><span class="s2">Card</span><span class="s5">, </span><span class="s2">CardContent</span><span class="s5">, </span><span class="s2">CardHeader</span><span class="s5">, </span><span class="s2">CardTitle</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s4">"@/components/ui/card"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">WritingPrompt</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/entities/WritingPrompt"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">WritingEntry</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/entities/WritingEntry"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">User</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/entities/User"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { </span><span class="s3">InvokeLLM</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"@/integrations/Core"</span><span class="s5">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s5"> { </span><span class="s2">Loader2</span><span class="s5">, </span><span class="s2">Sparkles</span><span class="s5">, </span><span class="s2">CheckCircle</span><span class="s5">, </span><span class="s2">PenTool</span><span class="s5">, </span><span class="s2">ArrowRight</span><span class="s5">, </span><span class="s2">Timer</span><span class="s5">, </span><span class="s2">Sun</span><span class="s5">, </span><span class="s2">Moon</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s4">"lucide-react"</span><span class="s5">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { </span><span class="s3">Link</span><span class="s2">, useLocation } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react-router-dom"</span><span class="s2">;</span></p>
+<p class="p1"><span class="s1">import</span><span class="s2"> { createPageUrl } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"@/utils"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">MoodSelector</span><span class="s5"> </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"../components/writing/MoodSelector"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">ReactQuill</span><span class="s5"> </span><span class="s1">from</span><span class="s5"> </span><span class="s2">'react-quill'</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s2">'react-quill/dist/quill.snow.css'</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">SubscriptionGate</span><span class="s5"> </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"../components/subscription/SubscriptionGate"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">SafetyNet</span><span class="s5">, { checkForCrisisContent } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"../components/writing/SafetyNet"</span><span class="s5">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> </span><span class="s3">SafetyNetPostWriting</span><span class="s5"> </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"../components/writing/SafetyNetPostWriting"</span><span class="s5">;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">const</span><span class="s2"> encouragements = [</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">"Keep going..."</span><span class="s5">, </span><span class="s2">"You're doing great."</span><span class="s5">, </span><span class="s2">"Let it all out."</span><span class="s5">, </span><span class="s2">"Wonderful."</span><span class="s5">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">"Your words matter."</span><span class="s5">, </span><span class="s2">"This is your space."</span><span class="s5">, </span><span class="s2">"Beautifully expressed."</span></p>
+<p class="p1"><span class="s2">];</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s2">export</span><span class="s5"> </span><span class="s2">default</span><span class="s5"> </span><span class="s2">function</span><span class="s5"> </span><span class="s3">WritingSession</span><span class="s5">() {</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s5"> [step, setStep] = useState(</span><span class="s4">'before'</span><span class="s5">); </span><span class="s2">// before, writing, after, saving, complete</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [prompt, setPrompt] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [moodBefore, setMoodBefore] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [moodAfter, setMoodAfter] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [content, setContent] = useState(</span><span class="s4">""</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [wordCount, setWordCount] = useState(</span><span class="s7">0</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [currentEncouragement, setCurrentEncouragement] = useState(</span><span class="s4">""</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [showEncouragement, setShowEncouragement] = useState(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [isSaving, setIsSaving] = useState(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [writingMode, setWritingMode] = useState(</span><span class="s4">'light'</span><span class="s2">); </span><span class="s8">// 'light' or 'dark'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [entryToEdit, setEntryToEdit] = useState(</span><span class="s1">null</span><span class="s2">); </span><span class="s8">// New state for editing existing entries</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [challengeConfig, setChallengeConfig] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [timeLeft, setTimeLeft] = useState(</span><span class="s1">null</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [isFullScreen, setIsFullScreen] = useState(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [showPostWritingSafety, setShowPostWritingSafety] = useState(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [crisisContentDetected, setCrisisContentDetected] = useState(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> location = useLocation();</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> getUrlParams = useCallback(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> </span><span class="s1">new</span><span class="s2"> </span><span class="s3">URLSearchParams</span><span class="s2">(location.search);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, [location.search]);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> params = getUrlParams();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> promptId = params.</span><span class="s1">get</span><span class="s2">(</span><span class="s4">'promptId'</span><span class="s2">);</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s5"> entryId = params.</span><span class="s1">get</span><span class="s5">(</span><span class="s4">'entryId'</span><span class="s5">); </span><span class="s2">// New: Get entryId from URL params</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> mode = params.</span><span class="s1">get</span><span class="s2">(</span><span class="s4">'mode'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> duration = params.</span><span class="s1">get</span><span class="s2">(</span><span class="s4">'duration'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> entryType = params.</span><span class="s1">get</span><span class="s2">(</span><span class="s4">'entry_type'</span><span class="s2">);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (entryType === </span><span class="s4">'free_writing'</span><span class="s2"> || mode === </span><span class="s4">'challenge'</span><span class="s2"> || entryId) { </span><span class="s8">// Added entryId for full screen</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setIsFullScreen(</span><span class="s1">true</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (promptId) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s3">WritingPrompt</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(promptId).then(setPrompt);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (entryId) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s3">WritingEntry</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(entryId).then(entry =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setEntryToEdit(entry);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setContent(entry.content);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setWordCount(entry.content.trim().split(</span><span class="s9">/\s+/</span><span class="s2">).filter(</span><span class="s3">Boolean</span><span class="s2">).length); </span><span class="s8">// Initialize word count</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setMoodBefore(entry.mood_before);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setMoodAfter(entry.mood_after);</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>setStep(</span><span class="s4">'writing'</span><span class="s5">); </span><span class="s2">// Go straight to writing if editing an entry</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}).</span><span class="s1">catch</span><span class="s2">(error =&gt; {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>console.error(</span><span class="s2">"Error fetching entry for editing:"</span><span class="s5">, error);</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s2">// Handle error, maybe redirect or show a message</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>setStep(</span><span class="s4">'before'</span><span class="s5">); </span><span class="s2">// Fallback to starting a new entry flow</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>});</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (mode === </span><span class="s4">'challenge'</span><span class="s2"> &amp;&amp; duration) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">const</span><span class="s2"> durationInSeconds = parseInt(duration, </span><span class="s7">10</span><span class="s2">) * </span><span class="s7">60</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setChallengeConfig({ duration: durationInSeconds });</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setTimeLeft(durationInSeconds);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, [getUrlParams]);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (step === </span><span class="s4">'writing'</span><span class="s2"> &amp;&amp; challengeConfig &amp;&amp; timeLeft &gt; </span><span class="s7">0</span><span class="s2">) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">const</span><span class="s2"> timer = setInterval(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>setTimeLeft(prev =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s1">if</span><span class="s2"> (prev &lt;= </span><span class="s7">1</span><span class="s2">) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>clearInterval(timer);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>setStep(</span><span class="s4">'after'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s1">return</span><span class="s2"> </span><span class="s7">0</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s1">return</span><span class="s2"> prev - </span><span class="s7">1</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>});</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}, </span><span class="s7">1000</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">return</span><span class="s2"> () =&gt; clearInterval(timer);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, [step, challengeConfig, timeLeft]);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> handleContentChange = (value) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setContent(value);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> words = value.trim().split(</span><span class="s9">/\s+/</span><span class="s2">).filter(</span><span class="s3">Boolean</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setWordCount(words.length);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s2">// Check for crisis content</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> hasCrisisContent = checkForCrisisContent(value);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setCrisisContentDetected(hasCrisisContent);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (words.length &gt; </span><span class="s7">0</span><span class="s2"> &amp;&amp; words.length % </span><span class="s7">25</span><span class="s2"> === </span><span class="s7">0</span><span class="s2">) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">const</span><span class="s2"> encouragement = encouragements[</span><span class="s3">Math</span><span class="s2">.floor(</span><span class="s3">Math</span><span class="s2">.random() * encouragements.length)];</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setCurrentEncouragement(encouragement);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setShowEncouragement(</span><span class="s1">true</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setTimeout(() =&gt; setShowEncouragement(</span><span class="s1">false</span><span class="s2">), </span><span class="s7">2000</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> handleSave = </span><span class="s1">async</span><span class="s2"> () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setIsSaving(</span><span class="s1">true</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setStep(</span><span class="s4">'saving'</span><span class="s2">);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">let</span><span class="s2"> isDistressing = </span><span class="s1">false</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">try</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">const</span><span class="s2"> response = </span><span class="s1">await</span><span class="s2"> </span><span class="s3">InvokeLLM</span><span class="s2">({</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>prompt: </span><span class="s2">`Analyze the following text for severe emotional distress (e.g., self-harm, hopelessness, crisis). Respond ONLY with a JSON object: {"is_distressing": boolean}. Text: "</span><span class="s5">${content}</span><span class="s2">"`</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>response_json_schema: { type: </span><span class="s4">"object"</span><span class="s2">, properties: { is_distressing: { type: </span><span class="s4">"boolean"</span><span class="s2"> } } }</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>});</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>isDistressing = response.is_distressing;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>} </span><span class="s1">catch</span><span class="s2"> (e) {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>console.error(</span><span class="s2">"Distress analysis failed:"</span><span class="s5">, e);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">    </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> entryData = {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>content: content,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>prompt_id: prompt ? prompt.id : (entryToEdit?.prompt_id || </span><span class="s1">null</span><span class="s2">),</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>mood_before: moodBefore,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>mood_after: moodAfter,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>entry_type: entryToEdit?.entry_type || (challengeConfig ? </span><span class="s4">'free_writing'</span><span class="s2"> : (prompt ? </span><span class="s4">"prompt_response"</span><span class="s2"> : </span><span class="s4">"free_writing"</span><span class="s2">)),</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>word_count: wordCount,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>is_distressing: isDistressing,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (entryToEdit) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">await</span><span class="s2"> </span><span class="s3">WritingEntry</span><span class="s2">.update(entryToEdit.id, entryData);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>} </span><span class="s1">else</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">try</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">const</span><span class="s2"> currentUser = </span><span class="s1">await</span><span class="s2"> </span><span class="s3">User</span><span class="s2">.me();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">await</span><span class="s2"> </span><span class="s3">User</span><span class="s2">.updateMyUserData({</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>entries_count: (currentUser.entries_count || </span><span class="s7">0</span><span class="s2">) + </span><span class="s7">1</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>});</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>} </span><span class="s1">catch</span><span class="s2"> (error) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>console.error(</span><span class="s4">"Error updating entry count:"</span><span class="s2">, error);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">await</span><span class="s2"> </span><span class="s3">WritingEntry</span><span class="s2">.create(entryData);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setIsSaving(</span><span class="s1">false</span><span class="s2">);</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">    </span></span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s2">// Show post-writing safety resources if crisis content was detected</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (crisisContentDetected) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setShowPostWritingSafety(</span><span class="s1">true</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>} </span><span class="s1">else</span><span class="s2"> {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>setStep(</span><span class="s4">'complete'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> quillModules = useMemo(() =&gt; ({</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>toolbar: </span><span class="s1">false</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}), []);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> formatTime = (seconds) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (seconds === </span><span class="s1">null</span><span class="s2">) </span><span class="s1">return</span><span class="s2"> </span><span class="s4">''</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> minutes = </span><span class="s3">Math</span><span class="s2">.floor(seconds / </span><span class="s7">60</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> remainingSeconds = seconds % </span><span class="s7">60</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> </span><span class="s4">`</span><span class="s2">${minutes}</span><span class="s4">:</span><span class="s2">${remainingSeconds &lt; </span><span class="s7">10</span><span class="s2"> ? </span><span class="s4">'0'</span><span class="s2"> : </span><span class="s4">''</span><span class="s2">}${remainingSeconds}</span><span class="s4">`</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> renderStep = () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">switch</span><span class="s2">(step) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'before'</span><span class="s2">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;motion.div key=</span><span class="s4">"before"</span><span class="s2"> initial={{ opacity: </span><span class="s7">0</span><span class="s2"> }} animate={{ opacity: </span><span class="s7">1</span><span class="s2"> }} exit={{ opacity: </span><span class="s7">0</span><span class="s2"> }} className=</span><span class="s4">"text-center"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">MoodSelector</span><span class="s2"> title=</span><span class="s4">"Before we begin, how are you feeling?"</span><span class="s2"> onMoodSelect={setMoodBefore} selectedMood={moodBefore} /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Button</span><span class="s2"> disabled={!moodBefore} onClick={() =&gt; setStep(</span><span class="s4">'writing'</span><span class="s2">)} className=</span><span class="s4">"mt-8 btn-therapy"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s3">Start</span><span class="s2"> </span><span class="s3">Writing</span><span class="s2"> &lt;</span><span class="s3">ArrowRight</span><span class="s2"> className=</span><span class="s4">"ml-2 w-4 h-4"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/</span><span class="s3">Button</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>);</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s1">case</span><span class="s5"> </span><span class="s2">'writing'</span><span class="s5">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;motion.div key=</span><span class="s4">"writing"</span><span class="s2"> initial={{ opacity: </span><span class="s7">0</span><span class="s2"> }} animate={{ opacity: </span><span class="s7">1</span><span class="s2"> }} className={</span><span class="s4">`w-full </span><span class="s2">${isFullScreen ? </span><span class="s4">'h-full flex flex-col'</span><span class="s2"> : </span><span class="s4">''</span><span class="s2">}</span><span class="s4">`</span><span class="s2">}&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Card</span><span class="s5"> className={</span><span class="s2">`w-full mx-auto transition-colors duration-500 </span><span class="s5">${writingMode === </span><span class="s2">'dark'</span><span class="s5"> ? </span><span class="s2">'bg-slate-900/80 border-indigo-900'</span><span class="s5"> : </span><span class="s2">'card-therapy'</span><span class="s5">}</span><span class="s2"> </span><span class="s5">${isFullScreen ? </span><span class="s2">'flex-grow flex flex-col max-w-full'</span><span class="s5"> : </span><span class="s2">'max-w-4xl'</span><span class="s5">}</span><span class="s2">`</span><span class="s5">}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">CardHeader</span><span class="s2"> className=</span><span class="s4">"relative"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s2">"flex justify-between items-center"</span><span class="s5">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                    </span>&lt;</span><span class="s3">CardTitle</span><span class="s5"> className={</span><span class="s2">`text-2xl font-serif transition-colors duration-500 </span><span class="s5">${writingMode === </span><span class="s2">'dark'</span><span class="s5"> ? </span><span class="s2">'text-indigo-200'</span><span class="s5"> : </span><span class="s2">'text-gray-800'</span><span class="s5">}</span><span class="s2">`</span><span class="s5">}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>{entryToEdit ? </span><span class="s4">'Edit Entry'</span><span class="s2"> : (challengeConfig ? </span><span class="s4">`</span><span class="s2">${challengeConfig.duration/</span><span class="s7">60</span><span class="s2">}</span><span class="s4">-Minute Challenge`</span><span class="s2"> : (prompt ? prompt.title : </span><span class="s4">"Free Writing"</span><span class="s2">))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/</span><span class="s3">CardTitle</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>{challengeConfig &amp;&amp; (</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                        </span>&lt;div className=</span><span class="s2">"flex items-center text-xl font-semibold text-rose-600 bg-rose-100 px-4 py-2 rounded-lg"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                            </span>&lt;</span><span class="s3">Timer</span><span class="s2"> className=</span><span class="s4">"w-6 h-6 mr-2"</span><span class="s2">/&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                            </span>{formatTime(timeLeft)}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>)}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>{prompt &amp;&amp; &lt;p className={</span><span class="s4">`mt-2 transition-colors duration-500 </span><span class="s2">${writingMode === </span><span class="s4">'dark'</span><span class="s2"> ? </span><span class="s4">'text-slate-400'</span><span class="s2"> : </span><span class="s4">'text-gray-600'</span><span class="s2">}</span><span class="s4">`</span><span class="s2">}&gt;{prompt.prompt_text}&lt;/p&gt;}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                </span>{challengeConfig &amp;&amp; &lt;p className={</span><span class="s2">`mt-2 transition-colors duration-500 </span><span class="s5">${writingMode === </span><span class="s2">'dark'</span><span class="s5"> ? </span><span class="s2">'text-slate-400'</span><span class="s5"> : </span><span class="s2">'text-gray-600'</span><span class="s5">}</span><span class="s2">`</span><span class="s5">}&gt;</span><span class="s3">Write</span><span class="s5"> without stopping. </span><span class="s3">Don</span><span class="s2">'t worry about grammar or punctuation, just let your thoughts flow.&lt;/p&gt;}</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s2">"absolute top-4 right-4 flex items-center gap-2"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;button onClick={() =&gt; setWritingMode(</span><span class="s4">'light'</span><span class="s2">)} className={</span><span class="s4">`p-2 rounded-full transition-colors </span><span class="s2">${writingMode === </span><span class="s4">'light'</span><span class="s2"> ? </span><span class="s4">'bg-amber-200'</span><span class="s2"> : </span><span class="s4">'hover:bg-slate-700'</span><span class="s2">}</span><span class="s4">`</span><span class="s2">}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;</span><span class="s3">Sun</span><span class="s2"> className={</span><span class="s4">`w-5 h-5 transition-colors </span><span class="s2">${writingMode === </span><span class="s4">'light'</span><span class="s2"> ? </span><span class="s4">'text-amber-600'</span><span class="s2"> : </span><span class="s4">'text-gray-400'</span><span class="s2">}</span><span class="s4">`</span><span class="s2">} /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;button onClick={() =&gt; setWritingMode(</span><span class="s4">'dark'</span><span class="s2">)} className={</span><span class="s4">`p-2 rounded-full transition-colors </span><span class="s2">${writingMode === </span><span class="s4">'dark'</span><span class="s2"> ? </span><span class="s4">'bg-indigo-900'</span><span class="s2"> : </span><span class="s4">'hover:bg-gray-200'</span><span class="s2">}</span><span class="s4">`</span><span class="s2">}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;</span><span class="s3">Moon</span><span class="s2"> className={</span><span class="s4">`w-5 h-5 transition-colors </span><span class="s2">${writingMode === </span><span class="s4">'dark'</span><span class="s2"> ? </span><span class="s4">'text-indigo-300'</span><span class="s2"> : </span><span class="s4">'text-gray-600'</span><span class="s2">}</span><span class="s4">`</span><span class="s2">} /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/</span><span class="s3">CardHeader</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">CardContent</span><span class="s2"> className={isFullScreen ? </span><span class="s4">'flex-grow flex flex-col'</span><span class="s2"> : </span><span class="s4">''</span><span class="s2">}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className={</span><span class="s4">`relative </span><span class="s2">${isFullScreen ? </span><span class="s4">'flex-grow flex flex-col'</span><span class="s2"> : </span><span class="s4">''</span><span class="s2">}</span><span class="s4">`</span><span class="s2">}&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;</span><span class="s3">ReactQuill</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>theme=</span><span class="s4">"snow"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>value={content}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>onChange={handleContentChange}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>modules={quillModules}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>placeholder=</span><span class="s4">"Let your words flow..."</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">                    </span>className={</span><span class="s2">`writing-editor </span><span class="s5">${writingMode === </span><span class="s2">'dark'</span><span class="s5"> ? </span><span class="s2">'writing-editor-dark'</span><span class="s5"> : </span><span class="s2">'writing-editor-light'</span><span class="s5">}</span><span class="s2"> </span><span class="s5">${isFullScreen ? </span><span class="s2">'flex-grow'</span><span class="s5"> : </span><span class="s2">''</span><span class="s5">}</span><span class="s2">`</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>/&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;</span><span class="s3">AnimatePresence</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>{showEncouragement &amp;&amp; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>initial={{ opacity: </span><span class="s7">0</span><span class="s2">, y: </span><span class="s7">10</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>animate={{ opacity: </span><span class="s7">1</span><span class="s2">, y: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space"> </span></span></p>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    span.s1 {font-kerning: none; background-color: #fffffe}
+    span.s2 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2"> </span><span class="s1">from</span><span class="s2"> </span><span class="s4">'react'</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { motion } </span><span class="s5">from</span><span class="s2"> </span><span class="s1">'framer-motion'</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { </span><span class="s3">Button</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s1">'@/components/ui/button'</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { </span><span class="s3">Card</span><span class="s2">, </span><span class="s3">CardContent</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s1">'@/components/ui/card'</span><span class="s2">;</span></p>
+<p class="p3"><span class="s5">import</span><span class="s2"> { </span><span class="s1">Timer</span><span class="s2">, </span><span class="s1">Edit</span><span class="s2">, </span><span class="s1">BookText</span><span class="s2">, </span><span class="s1">ArrowRight</span><span class="s2">, </span><span class="s1">TrendingUp</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s4">'lucide-react'</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5">import</span><span class="s2"> { </span><span class="s3">Link</span><span class="s2"> } </span><span class="s5">from</span><span class="s2"> </span><span class="s1">'react-router-dom'</span><span class="s2">;</span></p>
+<p class="p4"><span class="s5">import</span><span class="s1"> { createPageUrl } </span><span class="s5">from</span><span class="s1"> </span><span class="s4">'@/utils'</span><span class="s1">;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">export</span><span class="s2"> </span><span class="s1">default</span><span class="s2"> </span><span class="s1">function</span><span class="s2"> </span><span class="s3">WritingStudio</span><span class="s2">() {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s5">const</span><span class="s1"> writingModes = [</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Timer</span><span class="s1">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>title: </span><span class="s1">'Seven-Minute Challenge'</span><span class="s2">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>description: </span><span class="s1">'Timer-based writing. Don’t stop, just flow. Perfect for unlocking raw creativity.'</span><span class="s2">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>link: createPageUrl(</span><span class="s1">'WritingSession?mode=challenge&amp;duration=7'</span><span class="s2">),</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>cta: </span><span class="s1">'Start Challenge'</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">Edit</span><span class="s1">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>title: </span><span class="s4">'Free Writing'</span><span class="s1">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>description: </span><span class="s1">'An open page with no time limit. A private space to journal, reflect, or unload your thoughts.'</span><span class="s2">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>link: createPageUrl(</span><span class="s1">'WritingSession?entry_type=free_writing'</span><span class="s2">),</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>cta: </span><span class="s1">'Start Free Writing'</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>icon: </span><span class="s3">BookText</span><span class="s1">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>title: </span><span class="s1">'Guided Writing'</span><span class="s2">,</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>description: </span><span class="s1">'Structured prompts inspired by poetry, philosophy, and narrative medicine for deeper self-exploration.'</span><span class="s2">,</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>link: createPageUrl(</span><span class="s4">'GuidedWriting'</span><span class="s1">),</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>cta: </span><span class="s1">'Explore Prompts'</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>];</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s1">"min-h-screen py-12 bg-slate-50"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s1">"max-w-5xl mx-auto px-6"</span><span class="s2">&gt;</span></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">        </span>{</span><span class="s1">/* Header */</span><span class="s2">}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>initial={{ opacity: </span><span class="s7">0</span><span class="s1">, y: </span><span class="s7">30</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>animate={{ opacity: </span><span class="s7">1</span><span class="s1">, y: </span><span class="s7">0</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>className=</span><span class="s4">"text-center mb-16"</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>&lt;h1 className=</span><span class="s1">"text-5xl font-serif font-bold gradient-text mb-6"</span><span class="s2">&gt;</span></p>
+<p class="p3"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s1">Choose</span><span class="s2"> </span><span class="s1">Your</span><span class="s2"> </span><span class="s1">Writing</span><span class="s2"> </span><span class="s1">Mode</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/h1&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s1">"text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">Each</span><span class="s1"> mode offers a unique path into expression. </span><span class="s3">Select</span><span class="s1"> the one that calls to you today.</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">        </span>{</span><span class="s1">/* Writing Modes */</span><span class="s2">}</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s1">"grid md:grid-cols-3 gap-8 mb-16"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>{writingModes.map((mode, index) =&gt; (</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;motion.div</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>key={mode.title}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>initial={{ opacity: </span><span class="s7">0</span><span class="s1">, y: </span><span class="s7">30</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>animate={{ opacity: </span><span class="s7">1</span><span class="s1">, y: </span><span class="s7">0</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>transition={{ delay: </span><span class="s7">0.2</span><span class="s1"> + index * </span><span class="s7">0.1</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>className=</span><span class="s4">"flex"</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">Card</span><span class="s2"> className=</span><span class="s1">"card-therapy w-full flex flex-col hover:shadow-xl transition-all duration-300"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">CardContent</span><span class="s2"> className=</span><span class="s1">"p-8 text-center flex flex-col flex-grow"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s1">"w-16 h-16 bg-gradient-to-br from-blue-500 to-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-6"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;mode.icon className=</span><span class="s4">"w-8 h-8 text-white"</span><span class="s1"> /&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span>&lt;h3 className=</span><span class="s4">"text-xl font-semibold mb-3 text-slate-800"</span><span class="s1">&gt;{mode.title}&lt;/h3&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s4">"text-gray-600 leading-relaxed flex-grow mb-8"</span><span class="s1">&gt;{mode.description}&lt;/p&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span>&lt;</span><span class="s3">Link</span><span class="s1"> to={mode.link}&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;</span><span class="s3">Button</span><span class="s1"> className=</span><span class="s4">"w-full btn-therapy"</span><span class="s1">&gt;{mode.cta}&lt;/</span><span class="s3">Button</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span>&lt;/</span><span class="s3">Link</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/</span><span class="s3">CardContent</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>&lt;/</span><span class="s3">Card</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/motion.div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>))}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-converted-space">        </span>{</span><span class="s1">/* Link to Progress */</span><span class="s2">}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;motion.div</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>initial={{ opacity: </span><span class="s7">0</span><span class="s1">, y: </span><span class="s7">20</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>animate={{ opacity: </span><span class="s7">1</span><span class="s1">, y: </span><span class="s7">0</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>transition={{ delay: </span><span class="s7">0.6</span><span class="s1"> }}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">Card</span><span class="s2"> className=</span><span class="s1">"card-therapy bg-slate-100 border-slate-200"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">CardContent</span><span class="s2"> className=</span><span class="s1">"p-8 flex items-center justify-between"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>&lt;div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h3 className=</span><span class="s4">"text-xl font-semibold text-slate-800"</span><span class="s1">&gt;</span><span class="s3">Want</span><span class="s1"> to track your growth?&lt;/h3&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p className=</span><span class="s4">"text-slate-600"</span><span class="s1">&gt;</span><span class="s3">Visualize</span><span class="s1"> your emotional journey and progress over time.&lt;/p&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">Link</span><span class="s1"> to={createPageUrl(</span><span class="s4">'Progress'</span><span class="s1">)}&gt;</span></p>
+<p class="p2"><span class="s2"><span class="Apple-converted-space">                </span>&lt;</span><span class="s3">Button</span><span class="s2"> variant=</span><span class="s1">"outline"</span><span class="s2"> className=</span><span class="s1">"border-slate-300 text-slate-700 hover:bg-white"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                  </span></span><span class="s3">See</span><span class="s1"> </span><span class="s3">Your</span><span class="s1"> </span><span class="s3">Progress</span><span class="s1"> &lt;</span><span class="s3">TrendingUp</span><span class="s1"> className=</span><span class="s4">"ml-2 w-4 h-4"</span><span class="s1"> /&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/</span><span class="s3">Button</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">              </span>&lt;/</span><span class="s3">Link</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/</span><span class="s3">CardContent</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/</span><span class="s3">Card</span><span class="s1">&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/motion.div&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+</body>
+</html>

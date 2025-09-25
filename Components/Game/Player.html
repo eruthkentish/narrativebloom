@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
+    span.s1 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
+    span.s2 {font-kerning: none; background-color: #fffffe}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
+    span.s5 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
+    span.s8 {font-kerning: none; color: #bf1c25; background-color: #fffffe; -webkit-text-stroke: 0px #bf1c25}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2">, { useState, useEffect } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">"react"</span><span class="s2">;</span></p>
+<p class="p2"><span class="s1">import</span><span class="s5"> { motion } </span><span class="s1">from</span><span class="s5"> </span><span class="s2">"framer-motion"</span><span class="s5">;</span></p>
+<p class="p3"><span class="s1">import</span><span class="s5"> { </span><span class="s2">Heart</span><span class="s5">, </span><span class="s2">Feather</span><span class="s5">, </span><span class="s2">Sparkles</span><span class="s5"> } </span><span class="s1">from</span><span class="s5"> </span><span class="s4">"lucide-react"</span><span class="s5">;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">export</span><span class="s2"> </span><span class="s1">default</span><span class="s2"> </span><span class="s1">function</span><span class="s2"> </span><span class="s3">Player</span><span class="s2">({ realm, progress, setProgress }) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [position, setPosition] = useState({ x: </span><span class="s7">50</span><span class="s2">, y: </span><span class="s7">50</span><span class="s2"> });</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [energy, setEnergy] = useState(</span><span class="s7">100</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [emotionalState, setEmotionalState] = useState(</span><span class="s4">'neutral'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [recentWords, setRecentWords] = useState([]);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> movePlayer = (direction) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setPosition(prev =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">const</span><span class="s2"> speed = </span><span class="s7">5</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">let</span><span class="s2"> newPos = { ...prev };</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">switch</span><span class="s2">(direction) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'up'</span><span class="s2">: newPos.y = </span><span class="s3">Math</span><span class="s2">.max(</span><span class="s7">10</span><span class="s2">, prev.y - speed); </span><span class="s1">break</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'down'</span><span class="s2">: newPos.y = </span><span class="s3">Math</span><span class="s2">.min(</span><span class="s7">90</span><span class="s2">, prev.y + speed); </span><span class="s1">break</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'left'</span><span class="s2">: newPos.x = </span><span class="s3">Math</span><span class="s2">.max(</span><span class="s7">10</span><span class="s2">, prev.x - speed); </span><span class="s1">break</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'right'</span><span class="s2">: newPos.x = </span><span class="s3">Math</span><span class="s2">.min(</span><span class="s7">90</span><span class="s2">, prev.x + speed); </span><span class="s1">break</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">return</span><span class="s2"> newPos;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>});</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> addWord = (word, emotion) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setRecentWords(prev =&gt; [...prev.slice(-</span><span class="s7">4</span><span class="s2">), { word, emotion, id: </span><span class="s3">Date</span><span class="s2">.now() }]);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>setProgress(prevProgress =&gt; ({</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>...prevProgress,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>writtenWords: prevProgress.writtenWords + </span><span class="s7">1</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>emotionalJourney: [...prevProgress.emotionalJourney, { word, emotion, realm, timestamp: </span><span class="s3">Date</span><span class="s2">.now() }]</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}));</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> handleKeyPress = (e) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span></span><span class="s1">switch</span><span class="s2">(e.key) {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'ArrowUp'</span><span class="s2">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'w'</span><span class="s2">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'W'</span><span class="s2">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>e.preventDefault();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>movePlayer(</span><span class="s4">'up'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s1">break</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s5"> </span><span class="s2">'ArrowDown'</span><span class="s5">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'s'</span><span class="s2">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'S'</span><span class="s2">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>e.preventDefault();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>movePlayer(</span><span class="s4">'down'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s1">break</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s5"> </span><span class="s2">'ArrowLeft'</span><span class="s5">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'a'</span><span class="s2">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'A'</span><span class="s2">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>e.preventDefault();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>movePlayer(</span><span class="s4">'left'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s1">break</span><span class="s2">;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s5"> </span><span class="s2">'ArrowRight'</span><span class="s5">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'d'</span><span class="s2">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s1">case</span><span class="s2"> </span><span class="s4">'D'</span><span class="s2">:</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>e.preventDefault();</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>movePlayer(</span><span class="s4">'right'</span><span class="s2">);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s1">break</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>window.addEventListener(</span><span class="s4">'keydown'</span><span class="s2">, handleKeyPress);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> () =&gt; window.removeEventListener(</span><span class="s4">'keydown'</span><span class="s2">, handleKeyPress);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, []);</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> getPlayerIcon = () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">switch</span><span class="s2">(emotionalState) {</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s1">case</span><span class="s5"> </span><span class="s2">'grieving'</span><span class="s5">: </span><span class="s1">return</span><span class="s5"> </span><span class="s2">'💧'</span><span class="s5">;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s1">case</span><span class="s5"> </span><span class="s2">'healing'</span><span class="s5">: </span><span class="s1">return</span><span class="s5"> </span><span class="s2">'🌱'</span><span class="s5">;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s1">case</span><span class="s5"> </span><span class="s2">'hopeful'</span><span class="s5">: </span><span class="s1">return</span><span class="s5"> </span><span class="s2">'✨'</span><span class="s5">;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s1">case</span><span class="s5"> </span><span class="s2">'peaceful'</span><span class="s5">: </span><span class="s1">return</span><span class="s5"> </span><span class="s2">'🕊️'</span><span class="s5">;</span></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">      </span></span><span class="s2">default</span><span class="s5">: </span><span class="s2">return</span><span class="s5"> </span><span class="s4">'👤'</span><span class="s5">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p5"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">return</span><span class="s5"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;&gt;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">      </span>{</span><span class="s2">/* Player Avatar */</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;motion.div</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span>className=</span><span class="s2">"fixed z-50 pointer-events-none"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>style={{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>left: </span><span class="s4">`</span><span class="s2">${position.x}</span><span class="s4">%`</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>top: </span><span class="s4">`</span><span class="s2">${position.y}</span><span class="s4">%`</span><span class="s2">,</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>transform: </span><span class="s2">'translate(-50%, -50%)'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>}}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>animate={{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>scale: [</span><span class="s7">1</span><span class="s2">, </span><span class="s7">1.1</span><span class="s2">, </span><span class="s7">1</span><span class="s2">],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>}}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>transition={{</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>duration: </span><span class="s7">2</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>repeat: </span><span class="s3">Infinity</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>ease: </span><span class="s4">"easeInOut"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>}}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s4">"relative"</span><span class="s2">&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"w-12 h-12 bg-gradient-to-br from-white/80 to-white/60 rounded-full flex items-center justify-center shadow-lg border-2 border-white/40 backdrop-blur-sm"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;span className=</span><span class="s4">"text-2xl"</span><span class="s2">&gt;{getPlayerIcon()}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">          </span>{</span><span class="s2">/* Energy indicator */</span><span class="s5">}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Heart</span><span class="s2"> className=</span><span class="s4">"w-2 h-2 text-white"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">          </span>{</span><span class="s2">/* Recent words trail */</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>{recentWords.map((wordData, index) =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;motion.div</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>key={wordData.id}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>initial={{ opacity: </span><span class="s7">0</span><span class="s2">, scale: </span><span class="s7">0</span><span class="s2">, y: </span><span class="s7">0</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>animate={{<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>opacity: [</span><span class="s7">0</span><span class="s2">, </span><span class="s7">1</span><span class="s2">, </span><span class="s7">0</span><span class="s2">],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>scale: [</span><span class="s7">0</span><span class="s2">, </span><span class="s7">1</span><span class="s2">, </span><span class="s7">0.8</span><span class="s2">],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>y: [</span><span class="s7">0</span><span class="s2">, -</span><span class="s7">20</span><span class="s2"> - (index * </span><span class="s7">10</span><span class="s2">), -</span><span class="s7">40</span><span class="s2"> - (index * </span><span class="s7">15</span><span class="s2">)]</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>}}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>transition={{<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>duration: </span><span class="s7">3</span><span class="s2">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>times: [</span><span class="s7">0</span><span class="s2">, </span><span class="s7">0.3</span><span class="s2">, </span><span class="s7">1</span><span class="s2">]</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>}}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>className=</span><span class="s2">"absolute top-0 left-1/2 transform -translate-x-1/2 pointer-events-none"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"bg-gradient-to-r from-purple-500/80 to-pink-500/80 text-white text-xs px-2 py-1 rounded-full backdrop-blur-sm"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>{wordData.word}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/motion.div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/motion.div&gt;</span></p>
+<p class="p4"><span class="s6"></span><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">      </span>{</span><span class="s2">/* Movement instructions */</span><span class="s5">}</span></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"fixed bottom-6 right-6 bg-black/50 text-white p-4 rounded-xl backdrop-blur-sm z-40"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s4">"text-xs opacity-75 mb-2"</span><span class="s2">&gt;</span><span class="s3">Movement</span><span class="s2">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s4">"text-sm"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div&gt;</span><span class="s8">↑</span><span class="s2"> </span><span class="s3">W</span><span class="s2"> - </span><span class="s3">Up</span><span class="s2">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div&gt;</span><span class="s8">↓</span><span class="s2"> </span><span class="s3">S</span><span class="s2"> - </span><span class="s3">Down</span><span class="s2">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div&gt;</span><span class="s8">←</span><span class="s2"> </span><span class="s3">A</span><span class="s2"> - </span><span class="s3">Left</span><span class="s2">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div&gt;</span><span class="s8">→</span><span class="s2"> </span><span class="s3">D</span><span class="s2"> - </span><span class="s3">Right</span><span class="s2">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p1"><span class="s2">}</span></p>
+</body>
+</html>
